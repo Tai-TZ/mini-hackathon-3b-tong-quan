@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tổng quan — Mini Hackathon AI · Lớp 3B</title>
+    <meta name="description" content="Slide tổng quan lớp 3B — Mini Hackathon AI Batch 04, VinUni AI Thực Chiến." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --ink: #f6f9ff; --muted: #c2d0ea; --cyan: #35dbff;
+        --gold: #ffbd4a; --orange: #ff893d; --line: rgba(111, 192, 255, 0.28);
+        --sans: "Be Vietnam Pro", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+        --disp: "Space Grotesk", "Be Vietnam Pro", "Segoe UI", Arial, sans-serif;
+      }
+      * { box-sizing: border-box; }
+      html, body { height: 100%; margin: 0; }
+      body { background: #01060f; color: var(--ink); font-family: var(--sans); overflow: hidden; }
+
+      /* ---- khung 16:9 cố định, tự co theo màn hình ---- */
+      .viewport { display: grid; inset: 0; overflow: hidden; place-items: center; position: fixed; }
+      .stage { height: 900px; position: relative; transform-origin: center center; width: 1600px; }
+
+      .slide {
+        background:
+          radial-gradient(1100px 660px at 84% 10%, rgba(49,125,255,.20) 0%, transparent 62%),
+          radial-gradient(860px 600px at 6% 94%, rgba(53,219,255,.13) 0%, transparent 60%),
+          linear-gradient(160deg, #041028 0%, #020817 58%, #01050f 100%);
+        display: none; flex-direction: column; inset: 0; overflow: hidden;
+        padding: 46px 64px 54px; position: absolute;
+      }
+      .slide::before {
+        background-image: radial-gradient(rgba(96,211,255,.16) 1px, transparent 1px);
+        background-size: 32px 32px; content: ""; inset: 0;
+        mask-image: linear-gradient(90deg,#000 0%, rgba(0,0,0,.65) 55%, transparent 100%);
+        opacity: .5; pointer-events: none; position: absolute; z-index: 0;
+      }
+      .slide.active { display: flex; }
+      .slide > * { position: relative; z-index: 1; }
+
+      .topline { align-items: center; color: #dbeaff; display: flex; flex: 0 0 auto; font-size: 16px; font-weight: 700; gap: 14px; letter-spacing: .17em; text-transform: uppercase; }
+      .diamond { border: 2px solid var(--gold); box-shadow: 0 0 20px rgba(255,189,74,.4); flex: none; height: 14px; transform: rotate(45deg); width: 14px; }
+      .topline b { color: var(--gold); font-weight: 800; }
+      .cls { background: rgba(255,189,74,.14); border: 1px solid rgba(255,189,74,.5); border-radius: 8px; color: var(--gold); font-size: 15px; letter-spacing: .1em; padding: 4px 12px; }
+      .sn { color: var(--muted); letter-spacing: .1em; margin-left: auto; }
+
+      h1, h2, h3, p, ul { margin: 0; }
+      h1, h2, h3 { font-family: var(--disp); }
+      h1 { font-size: 104px; letter-spacing: -.05em; line-height: 1.06; }
+      h2 { font-size: 66px; letter-spacing: -.04em; line-height: 1.08; }
+      .eyebrow { color: var(--gold); font-size: 19px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; }
+      .lede { color: var(--muted); font-size: 30px; line-height: 1.45; }
+      .gold { color: var(--gold); } .cyan { color: var(--cyan); } .orange { color: var(--orange); }
+
+      .body { display: flex; flex: 1 1 auto; flex-direction: column; justify-content: center; gap: 34px; padding-top: 26px; }
+      .head { display: grid; gap: 16px; }
+      .note { border-left: 5px solid var(--gold); color: #ffe6b4; font-size: 25px; font-weight: 600; line-height: 1.4; padding-left: 22px; }
+      .note.cy { border-left-color: var(--cyan); color: #dff6ff; }
+
+      /* --- bìa --- */
+      .hero-grid { align-items: center; display: grid; gap: 56px; grid-template-columns: 1fr 440px; }
+      .hero-copy { display: grid; gap: 30px; }
+      .capital { background: linear-gradient(145deg, rgba(13,54,104,.85), rgba(4,16,40,.85)); border: 1px solid rgba(65,203,255,.5); border-radius: 30px; overflow: hidden; padding: 38px 34px; position: relative; text-align: center; }
+      .capital::after { background: radial-gradient(circle, rgba(53,219,255,.7) 0 3px, transparent 4px); background-size: 46px 46px; content: ""; inset: 0; opacity: .28; position: absolute; }
+      .capital-label { color: var(--muted); font-size: 17px; font-weight: 700; letter-spacing: .13em; position: relative; text-transform: uppercase; z-index: 1; }
+      .capital-num { color: var(--gold); font-family: var(--disp); font-size: 172px; font-weight: 700; letter-spacing: -.055em; line-height: 1; margin-top: 14px; position: relative; text-shadow: 0 0 34px rgba(255,189,74,.4); z-index: 1; }
+      .capital-unit { color: #fff3d4; font-size: 26px; font-weight: 700; letter-spacing: .07em; margin-top: 8px; position: relative; text-transform: uppercase; z-index: 1; }
+
+      /* --- bảng lịch --- */
+      .tl { border: 1px solid var(--line); border-radius: 22px; overflow: hidden; }
+      .tl-row { align-items: center; border-bottom: 1px solid rgba(111,192,255,.13); display: grid; gap: 24px; grid-template-columns: 140px 300px 1fr; padding: 15px 36px; }
+      .tl-row:last-child { border-bottom: 0; }
+      .tl-row.hd { background: rgba(9,33,73,.75); padding: 10px 36px; }
+      .tl-row.hd span { color: var(--muted); font-size: 16px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+      .tl-cp { color: var(--cyan); font-family: var(--disp); font-size: 36px; font-weight: 700; line-height: 1.15; }
+      .tl-time { color: var(--gold); font-family: var(--disp); font-size: 34px; font-weight: 700; line-height: 1.15; white-space: nowrap; }
+      .tl-name { font-size: 26px; font-weight: 600; line-height: 1.25; }
+      .tl-row.hl { background: rgba(255,189,74,.08); }
+      .tl-row.hl .tl-cp { color: var(--gold); }
+
+      /* --- thẻ --- */
+      .three { display: grid; gap: 24px; grid-template-columns: repeat(3, 1fr); }
+      .two { display: grid; gap: 28px; grid-template-columns: repeat(2, 1fr); }
+      .card { background: linear-gradient(160deg, rgba(9,37,74,.9), rgba(3,14,35,.85)); border: 1px solid var(--line); border-radius: 26px; display: grid; gap: 14px; padding: 30px 32px; }
+      .card.g { border-color: rgba(255,189,74,.55); }
+      .card.o { border-color: rgba(255,137,61,.5); }
+      .card.c { border-color: rgba(53,219,255,.5); }
+      .card-num { color: var(--gold); font-family: var(--disp); font-size: 78px; font-weight: 700; letter-spacing: -.05em; line-height: .9; }
+      .card h3 { font-size: 31px; letter-spacing: -.02em; line-height: 1.2; }
+      .card p { color: var(--muted); font-size: 22px; line-height: 1.48; }
+      .tag { font-size: 17px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+      .tag.o { color: var(--orange); } .tag.c { color: var(--cyan); }
+      code { font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; }
+      .repo { background: rgba(3,13,32,.75); border: 1px solid var(--line); border-radius: 18px; color: #cfe6ff; font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; font-size: 27px; line-height: 1.85; padding: 20px 32px; }
+      .repo b { color: var(--gold); }
+
+      /* --- danh sách có số --- */
+      .rows { display: grid; gap: 14px; }
+      .row { align-items: center; background: linear-gradient(145deg, rgba(7,32,66,.9), rgba(5,17,40,.85)); border: 1px solid var(--line); border-radius: 20px; display: grid; gap: 26px; grid-template-columns: 74px 1fr 160px; padding: 16px 30px; }
+      .rn { align-items: center; background: rgba(52,216,255,.12); border: 1px solid rgba(52,216,255,.45); border-radius: 13px; color: var(--cyan); display: flex; font-family: var(--disp); font-size: 28px; font-weight: 700; height: 60px; justify-content: center; }
+      .row.hl { border-color: rgba(255,189,74,.6); }
+      .row.hl .rn { background: rgba(255,189,74,.13); border-color: rgba(255,189,74,.55); color: var(--gold); }
+      .row h3 { font-size: 29px; letter-spacing: -.015em; line-height: 1.2; }
+      .row p { color: var(--muted); font-size: 21px; line-height: 1.3; margin-top: 5px; }
+      .pt { color: var(--gold); font-family: var(--disp); font-size: 48px; font-weight: 700; line-height: 1; text-align: right; white-space: nowrap; }
+      .pt small { font-family: var(--sans); font-size: 20px; font-weight: 600; }
+
+      .art { display: flex; justify-content: center; }
+      .art svg { display: block; width: 100%; }
+
+      .endcall { align-items: center; background: rgba(53,219,255,.09); border: 1px solid rgba(53,219,255,.42); border-radius: 22px; display: flex; gap: 34px; justify-content: space-between; padding: 22px 34px; }
+      .endcall strong { color: #dff6ff; font-size: 30px; font-weight: 700; }
+      .endcall span { color: var(--muted); font-size: 22px; text-align: right; }
+
+      /* --- nav --- */
+      .nav { align-items: center; bottom: 18px; display: flex; gap: 9px; position: fixed; right: 22px; z-index: 20; }
+      .nav button { background: rgba(5,19,45,.78); border: 1px solid rgba(151,207,255,.36); border-radius: 10px; color: #e9f5ff; cursor: pointer; font: 700 16px var(--sans); height: 40px; min-width: 44px; }
+      .nav button:hover { background: rgba(28,99,172,.55); border-color: var(--cyan); }
+      .nav button:disabled { cursor: not-allowed; opacity: .38; }
+      .dots { display: flex; gap: 6px; margin: 0 5px; }
+      .dot { background: rgba(211,233,255,.35); border-radius: 99px; height: 8px; transition: .2s; width: 8px; }
+      .dot.active { background: var(--gold); box-shadow: 0 0 12px var(--gold); width: 22px; }
+      .hint { bottom: 24px; color: rgba(206,225,248,.55); font-size: 13px; left: 24px; position: fixed; z-index: 20; }
+
+      @media print {
+        @page { margin: 0; size: 1600px 900px; }
+        body { overflow: visible; }
+        .viewport { display: block; overflow: visible; position: static; }
+        .stage { height: auto; transform: none !important; width: 1600px; }
+        .slide { break-after: page; display: flex !important; height: 900px; page-break-after: always; position: relative; }
+        .nav, .hint { display: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="viewport">
+      <div class="stage" id="stage">
+
+        <!-- 01 -->
+        <section class="slide active">
+          <div class="topline"><span class="diamond"></span><b>AI THỰC CHIẾN</b><span>Mini Hackathon AI</span><span class="cls">LỚP 3B</span><span class="sn">01 / 08</span></div>
+          <div class="body">
+            <div class="hero-grid">
+              <div class="hero-copy">
+                <p class="eyebrow">Batch 04 · 17 → 19 tháng 9</p>
+                <h1>SPEC → Prototype<br /><span class="gold">→ Demo.</span></h1>
+                <p class="lede">Không phải cuộc thi code.<br />Đây là cuộc thi <span class="cyan">tư duy sản phẩm AI</span>.</p>
+              </div>
+              <div class="capital">
+                <p class="capital-label">Thời gian các bạn có</p>
+                <div class="capital-num">39</div>
+                <p class="capital-unit">giờ</p>
+              </div>
+            </div>
+            <p class="note cy">Nhóm <strong>3–4 người</strong> · thi theo phòng · E402 và E403 trao giải riêng</p>
+          </div>
+        </section>
+
+        <!-- 02 -->
+        <section class="slide">
+          <div class="topline"><span class="diamond"></span><b>AI THỰC CHIẾN</b><span>Đo cái gì</span><span class="cls">LỚP 3B</span><span class="sn">02 / 08</span></div>
+          <div class="body">
+            <div class="head">
+              <p class="eyebrow">Trước khi bắt tay vào làm</p>
+              <h2>Không thi xem ai <span class="gold">làm to hơn.</span></h2>
+              <p class="lede">Điểm cho theo <span class="cyan">bằng chứng</span> — vì sao chọn vấn đề này, dựa vào đâu, đo bằng cách nào.</p>
+            </div>
+            <div class="two">
+              <article class="card o">
+                <p class="tag o">Chưa đạt</p>
+                <h3>“Bọn em làm trợ lý AI, có 8 tính năng”</h3>
+              </article>
+              <article class="card c">
+                <p class="tag c">Đạt</p>
+                <h3>“Sinh viên mất 15 phút tìm slide cũ. Bọn em thử 21 câu, đúng 13”</h3>
+              </article>
+            </div>
+            <p class="note">Báo số liệu <strong>trung thực vẫn được đủ điểm</strong> — kể cả khi kết quả chưa đẹp.</p>
+          </div>
+        </section>
+
+        <!-- 03 -->
+        <section class="slide">
+          <div class="topline"><span class="diamond"></span><b>AI THỰC CHIẾN</b><span>Lịch nộp</span><span class="cls">LỚP 3B</span><span class="sn">03 / 08</span></div>
+          <div class="body">
+            <div class="head">
+              <p class="eyebrow">Chụp màn hình slide này</p>
+              <h2>Sáu mốc, <span class="gold">năm mốc tính điểm.</span></h2>
+            </div>
+            <div class="tl">
+              <div class="tl-row hd"><span>Mốc</span><span>Hạn nộp</span><span>Nộp gì</span></div>
+              <div class="tl-row"><div class="tl-cp">CP1</div><div class="tl-time">19:30 · 17/9</div><div class="tl-name">Canvas 4 ô + link repo GitHub</div></div>
+              <div class="tl-row"><div class="tl-cp">CP2</div><div class="tl-time">21:00 · 17/9</div><div class="tl-name">Luồng hoạt động — sơ đồ cũng được</div></div>
+              <div class="tl-row"><div class="tl-cp">CP3</div><div class="tl-time">16:00 · 18/9</div><div class="tl-name">Video thao tác 30 giây + số đo</div></div>
+              <div class="tl-row hl"><div class="tl-cp">CP4</div><div class="tl-time">21:00 · 18/9</div><div class="tl-name">Chốt <code>spec.md</code> — khoá chuẩn “đạt”</div></div>
+              <div class="tl-row hl"><div class="tl-cp">CP5</div><div class="tl-time">22:30 · 18/9</div><div class="tl-name">Slide PDF + video dự phòng — hạn cuối</div></div>
+              <div class="tl-row"><div class="tl-cp">CP6</div><div class="tl-time">09:00 · 19/9</div><div class="tl-name">Thuyết trình — không nộp thêm</div></div>
+            </div>
+            <p class="note">Mỗi mốc <strong>5 điểm</strong>. Nộp muộn là <strong>0 điểm mốc đó</strong>, không bù bằng mốc khác được.</p>
+          </div>
+        </section>
+
+        <!-- 04 -->
+        <section class="slide">
+          <div class="topline"><span class="diamond"></span><b>AI THỰC CHIẾN</b><span>Cách nộp</span><span class="cls">LỚP 3B</span><span class="sn">04 / 08</span></div>
+          <div class="body">
+            <div class="head">
+              <p class="eyebrow">Ba điều dễ làm sai nhất</p>
+              <h2>Nộp thế nào <span class="gold">cho đúng.</span></h2>
+            </div>
+            <div class="three">
+              <article class="card g">
+                <div class="card-num">01</div>
+                <h3>Đội trưởng nộp thay cả nhóm</h3>
+                <p>Một phiếu cho cả nhóm ở mỗi mốc. <strong class="gold">Cả 5 mốc cùng một mã học viên</strong> — đây là cách BTC ghép phiếu.</p>
+              </article>
+              <article class="card o">
+                <div class="card-num">02</div>
+                <h3>Tạo repo mới, đừng fork</h3>
+                <p>Fork mang theo thư mục <code>data/</code>, mà repo phải công khai — <strong class="orange">dữ liệu khoá lên mạng</strong>.</p>
+              </article>
+              <article class="card c">
+                <div class="card-num">03</div>
+                <h3>Từng người nộp link lên VLearn</h3>
+                <p>Cả nhóm nộp <strong class="cyan">cùng một link repo</strong>. Đây là chỗ duy nhất mỗi người phải tự làm.</p>
+              </article>
+            </div>
+            <div class="repo">
+              Tên repo &nbsp;→&nbsp; K4-<b>&lt;lớp&gt;</b>-<b>&lt;phòng&gt;</b>-<b>&lt;tên nhóm&gt;</b> &nbsp;&nbsp;·&nbsp;&nbsp; Ví dụ &nbsp;→&nbsp; K4-<b>3B</b>-<b>E403</b>-StudyPulse
+            </div>
+          </div>
+        </section>
+
+        <!-- 05 -->
+        <section class="slide">
+          <div class="topline"><span class="diamond"></span><b>AI THỰC CHIẾN</b><span>Cách chấm</span><span class="cls">LỚP 3B</span><span class="sn">05 / 08</span></div>
+          <div class="body">
+            <div class="head">
+              <p class="eyebrow">Đọc 04-rubric.md ngay tối nay</p>
+              <h2>Một trăm điểm <span class="gold">đến từ đâu.</span></h2>
+            </div>
+            <div class="art">
+              <svg viewBox="0 0 1480 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="25 điểm nộp đúng hạn, 67 điểm chấm trên repo, 8 điểm cho người ngoài dùng thử">
+                <g font-family="Space Grotesk, Be Vietnam Pro, Arial, sans-serif">
+                  <rect x="40" y="0" width="346" height="112" rx="18" fill="#35dbff" fill-opacity=".18" stroke="#35dbff" stroke-opacity=".62" stroke-width="1.5"/>
+                  <text x="213" y="76" fill="#bdf0ff" font-size="60" font-weight="700" text-anchor="middle">25đ</text>
+                  <rect x="390" y="0" width="934" height="112" rx="18" fill="#ffbd4a" fill-opacity=".17" stroke="#ffbd4a" stroke-opacity=".62" stroke-width="1.5"/>
+                  <text x="857" y="76" fill="#ffe0a7" font-size="60" font-weight="700" text-anchor="middle">67đ</text>
+                  <rect x="1328" y="0" width="112" height="112" rx="18" fill="#ff893d" fill-opacity=".18" stroke="#ff893d" stroke-opacity=".62" stroke-width="1.5"/>
+                  <text x="1384" y="76" fill="#ffcbaa" font-size="52" font-weight="700" text-anchor="middle">8đ</text>
+                </g>
+                <g font-family="Be Vietnam Pro, Segoe UI, Arial, sans-serif" font-size="22">
+                  <text x="213" y="156" fill="#8fd6ee" text-anchor="middle">nộp đúng hạn · 5 mốc × 5đ</text>
+                  <text x="857" y="156" fill="#d9ae6b" text-anchor="middle">chấm trên file trong repo</text>
+                  <text x="1440" y="156" fill="#ff9d6d" text-anchor="end">cho người ngoài dùng thử</text>
+                </g>
+              </svg>
+            </div>
+            <div class="two">
+              <article class="card g">
+                <h3>Viết spec tử tế ăn <span class="gold">45 trên 67 điểm</span></h3>
+                <p>Ba khối nặng nhất — bằng chứng, thiết kế, kiểm thử — đều chấm trên <code>spec.md</code>.</p>
+              </article>
+              <article class="card">
+                <h3>Bỏ qua phần dùng thử thì trần điểm là <span class="orange">92</span></h3>
+                <p>Cần <strong class="cyan">5 người ngoài nhóm</strong>, chép <strong class="cyan">nguyên văn</strong> lời họ nói, và sửa ít nhất một thứ theo đó.</p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <!-- 06 -->
+        <section class="slide">
+          <div class="topline"><span class="diamond"></span><b>AI THỰC CHIẾN</b><span>Buổi thi</span><span class="cls">LỚP 3B</span><span class="sn">06 / 08</span></div>
+          <div class="body">
+            <div class="head">
+              <p class="eyebrow">Sáng 19/9 · mốc CP6</p>
+              <h2>Thi trong cụm trước, <span class="gold">rồi mới lên sân khấu.</span></h2>
+            </div>
+            <div class="art">
+              <svg viewBox="0 0 1480 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Thi trong cụm, game đầu tư, chung kết phòng, cả phòng bình chọn">
+                <g font-family="Be Vietnam Pro, Segoe UI, Arial, sans-serif">
+                  <rect x="0" y="16" width="330" height="106" rx="20" fill="#35dbff" fill-opacity=".14" stroke="#35dbff" stroke-opacity=".5" stroke-width="1.5"/>
+                  <text x="165" y="60" fill="#bdf0ff" font-size="27" font-weight="700" text-anchor="middle">Thi trong cụm</text>
+                  <text x="165" y="94" fill="#8fd6ee" font-size="21" text-anchor="middle">demo tại bàn</text>
+                  <path d="M348 69 H374" stroke="#6fc0ff" stroke-width="2.5"/><path d="M368 61 L380 69 L368 77 Z" fill="#6fc0ff"/>
+                  <rect x="390" y="16" width="330" height="106" rx="20" fill="#35dbff" fill-opacity=".14" stroke="#35dbff" stroke-opacity=".5" stroke-width="1.5"/>
+                  <text x="555" y="60" fill="#bdf0ff" font-size="27" font-weight="700" text-anchor="middle">Game đầu tư</text>
+                  <text x="555" y="94" fill="#8fd6ee" font-size="21" text-anchor="middle">mỗi đội 100 điểm vốn</text>
+                  <path d="M738 69 H764" stroke="#6fc0ff" stroke-width="2.5"/><path d="M758 61 L770 69 L758 77 Z" fill="#6fc0ff"/>
+                  <rect x="780" y="16" width="330" height="106" rx="20" fill="#ffbd4a" fill-opacity=".14" stroke="#ffbd4a" stroke-opacity=".55" stroke-width="1.5"/>
+                  <text x="945" y="60" fill="#ffe0a7" font-size="27" font-weight="700" text-anchor="middle">Chung kết phòng</text>
+                  <text x="945" y="94" fill="#d9ae6b" font-size="21" text-anchor="middle">mỗi đội 10 phút</text>
+                  <path d="M1128 69 H1154" stroke="#ffbd4a" stroke-width="2.5"/><path d="M1148 61 L1160 69 L1148 77 Z" fill="#ffbd4a"/>
+                  <rect x="1170" y="16" width="310" height="106" rx="20" fill="#ffbd4a" fill-opacity=".19" stroke="#ffbd4a" stroke-opacity=".72" stroke-width="1.5"/>
+                  <text x="1325" y="60" fill="#fff3d4" font-size="27" font-weight="700" text-anchor="middle">Cả phòng bình chọn</text>
+                  <text x="1325" y="94" fill="#d9ae6b" font-size="21" text-anchor="middle">ra Top của phòng</text>
+                </g>
+              </svg>
+            </div>
+            <div class="two">
+              <article class="card">
+                <h3>Game đầu tư — <span class="cyan">hai luật thôi</span></h3>
+                <p>Không đầu tư vào đội mình · <strong class="gold">tổng phải đúng 100</strong>, thừa hoặc thiếu là phiếu không được tính. Chia cho mấy đội tuỳ các bạn.</p>
+              </article>
+              <article class="card g">
+                <h3>Demo hỏng vì mạng <span class="gold">không bị trừ điểm</span></h3>
+                <p>Đó là lý do CP5 bắt nộp <strong class="gold">video demo dự phòng</strong>. Hỏng thì chiếu video, chấm trên video.</p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <!-- 07 -->
+        <section class="slide">
+          <div class="topline"><span class="diamond"></span><b>AI THỰC CHIẾN</b><span>Giải thưởng</span><span class="cls">LỚP 3B</span><span class="sn">07 / 08</span></div>
+          <div class="body">
+            <div class="head">
+              <p class="eyebrow">Cộng thẳng vào điểm bài lab</p>
+              <h2>Điểm thưởng <span class="gold">cho mỗi thành viên.</span></h2>
+            </div>
+            <div class="rows">
+              <article class="row hl"><div class="rn">1</div><div><h3>Giải Nhất của phòng</h3></div><div class="pt">+10<small>đ</small></div></article>
+              <article class="row hl"><div class="rn">2</div><div><h3>Giải Nhì của phòng</h3></div><div class="pt">+5<small>đ</small></div></article>
+              <article class="row"><div class="rn">3</div><div><h3>Giải Ba — chỉ phòng E403</h3></div><div class="pt">+3<small>đ</small></div></article>
+              <article class="row"><div class="rn">✓</div><div><h3>Vào chung kết nhưng không có giải</h3></div><div class="pt">+2<small>đ</small></div></article>
+              <article class="row"><div class="rn">★</div><div><h3>Đội đầu tư nhiều điểm nhất và sớm nhất vào đội giải Nhất</h3></div><div class="pt">+2<small>đ</small></div></article>
+            </div>
+            <p class="note cy">E403 có <strong>7 đội</strong> được cộng điểm · E402 có <strong>6 đội</strong> · thêm <strong>4 giải track</strong> do team VLearn và team Studio trao.</p>
+          </div>
+        </section>
+
+        <!-- 08 -->
+        <section class="slide">
+          <div class="topline"><span class="diamond"></span><b>AI THỰC CHIẾN</b><span>Bắt đầu</span><span class="cls">LỚP 3B</span><span class="sn">08 / 08</span></div>
+          <div class="body">
+            <div class="head">
+              <p class="eyebrow">Trước mốc CP1 lúc 19:30 hôm nay</p>
+              <h2>Bốn việc <span class="gold">làm ngay bây giờ.</span></h2>
+            </div>
+            <div class="rows">
+              <article class="row hl"><div class="rn">1</div><div><h3>Chốt nhóm 3–4 người và chọn đội trưởng</h3><p>Đội trưởng là người chắc chắn theo được cả 5 mốc</p></div><div class="pt">5<small> phút</small></div></article>
+              <article class="row hl"><div class="rn">2</div><div><h3>Tạo repo mới, đặt tên đúng, để công khai</h3><p>Thử mở bằng cửa sổ ẩn danh — mở được thì mới đúng</p></div><div class="pt">5<small> phút</small></div></article>
+              <article class="row"><div class="rn">3</div><div><h3>Copy README của BTC về repo, điền bảng thành viên</h3><p>Ghi rõ ai làm phần nào — giám khảo sẽ hỏi đúng người đó</p></div><div class="pt">10<small> phút</small></div></article>
+              <article class="row"><div class="rn">4</div><div><h3>Mỗi người nộp link repo lên VLearn</h3><p>Cả nhóm cùng một link</p></div><div class="pt">2<small> phút</small></div></article>
+            </div>
+            <div class="endcall">
+              <strong>Kẹt quá 20 phút thì gọi coach</strong>
+              <span>Mọi thông báo và link nộp đều ghim trên Discord</span>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+    <div class="hint">← → chuyển slide &middot; F toàn màn hình &middot; Ctrl+P in ra PDF</div>
+    <nav class="nav" aria-label="Điều hướng slide">
+      <button id="prev" type="button" aria-label="Slide trước">‹</button>
+      <div class="dots"></div>
+      <button id="next" type="button" aria-label="Slide sau">›</button>
+      <button id="fs" type="button" aria-label="Toàn màn hình">⛶</button>
+    </nav>
+
+    <script>
+      const stage = document.querySelector('#stage');
+      const slides = [...document.querySelectorAll('.slide')];
+      const dotsWrap = document.querySelector('.dots');
+      slides.forEach(() => dotsWrap.insertAdjacentHTML('beforeend', '<span class="dot"></span>'));
+      const dots = [...document.querySelectorAll('.dot')];
+      const prevButton = document.querySelector('#prev');
+      const nextButton = document.querySelector('#next');
+      let current = 0;
+
+      function fit() {
+        const scale = Math.min(window.innerWidth / 1600, window.innerHeight / 900);
+        stage.style.transform = `scale(${scale})`;
+      }
+      window.addEventListener('resize', fit);
+      fit();
+
+      function render(index) {
+        current = Math.max(0, Math.min(index, slides.length - 1));
+        slides.forEach((slide, i) => slide.classList.toggle('active', i === current));
+        dots.forEach((dot, i) => dot.classList.toggle('active', i === current));
+        prevButton.disabled = current === 0;
+        nextButton.disabled = current === slides.length - 1;
+        window.location.hash = `slide-${current + 1}`;
+      }
+
+      prevButton.addEventListener('click', () => render(current - 1));
+      nextButton.addEventListener('click', () => render(current + 1));
+      document.querySelector('#fs').addEventListener('click', () => document.documentElement.requestFullscreen?.());
+      document.addEventListener('keydown', (event) => {
+        if (['ArrowRight', 'PageDown', ' '].includes(event.key)) { event.preventDefault(); render(current + 1); }
+        if (['ArrowLeft', 'PageUp'].includes(event.key)) { event.preventDefault(); render(current - 1); }
+        if (event.key.toLowerCase() === 'f') { document.documentElement.requestFullscreen?.(); }
+      });
+      const initial = Number(window.location.hash.replace('#slide-', ''));
+      render(Number.isInteger(initial) && initial > 0 ? initial - 1 : 0);
+      document.fonts?.ready.then(fit);
+    </script>
+  </body>
+</html>
