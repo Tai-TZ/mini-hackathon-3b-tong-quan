@@ -3,164 +3,234 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tổng quan — Mini Hackathon AI · Lớp 3B</title>
-    <meta name="description" content="Slide tổng quan lớp 3B — Mini Hackathon AI Batch 04, VinUni AI Thực Chiến." />
+    <title>Mini Hackathon AI Batch 04 — Lớp 3B</title>
+    <meta name="description" content="Slide hướng dẫn chi tiết lớp 3B — Mini Hackathon AI Batch 04, VinUni." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
     <style>
-      :root {
-        --ink: #f6f9ff; --muted: #c2d0ea; --cyan: #35dbff;
-        --gold: #ffbd4a; --orange: #ff893d; --line: rgba(111, 192, 255, 0.28);
-        --sans: "Be Vietnam Pro", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-        --disp: "Space Grotesk", "Be Vietnam Pro", "Segoe UI", Arial, sans-serif;
+      :root{
+        --ink:#f6f9ff;--muted:#c2d0ea;--cyan:#35dbff;--gold:#ffbd4a;
+        --orange:#ff893d;--line:rgba(111,192,255,.28);
+        --sans:"Be Vietnam Pro","Segoe UI","Helvetica Neue",Arial,sans-serif;
+        --disp:"Space Grotesk","Be Vietnam Pro","Segoe UI",Arial,sans-serif;
       }
-      * { box-sizing: border-box; }
-      html, body { height: 100%; margin: 0; }
-      body { background: #01060f; color: var(--ink); font-family: var(--sans); overflow: hidden; }
+      *{box-sizing:border-box}
+      html,body{height:100%;margin:0}
+      body{background:#01060f;color:var(--ink);font-family:var(--sans);overflow:hidden}
+      .viewport{display:grid;inset:0;overflow:hidden;place-items:center;position:fixed}
+      .stage{display:flex;height:900px;overflow:hidden;position:relative;
+        transform-origin:center center;width:1600px}
+      .main{flex:1 1 auto;position:relative}
 
-      /* ---- khung 16:9 cố định, tự co theo màn hình ---- */
-      .viewport { display: grid; inset: 0; overflow: hidden; place-items: center; position: fixed; }
-      .stage { height: 900px; position: relative; transform-origin: center center; width: 1600px; }
-
-      .slide {
+      .slide{
         background:
-          radial-gradient(1100px 660px at 84% 10%, rgba(49,125,255,.20) 0%, transparent 62%),
-          radial-gradient(860px 600px at 6% 94%, rgba(53,219,255,.13) 0%, transparent 60%),
-          linear-gradient(160deg, #041028 0%, #020817 58%, #01050f 100%);
-        display: none; flex-direction: column; inset: 0; overflow: hidden;
-        padding: 46px 64px 54px; position: absolute;
-      }
-      .slide::before {
-        background-image: radial-gradient(rgba(96,211,255,.16) 1px, transparent 1px);
-        background-size: 32px 32px; content: ""; inset: 0;
-        mask-image: linear-gradient(90deg,#000 0%, rgba(0,0,0,.65) 55%, transparent 100%);
-        opacity: .5; pointer-events: none; position: absolute; z-index: 0;
-      }
-      .slide.active { display: flex; }
-      .slide > * { position: relative; z-index: 1; }
+          radial-gradient(900px 620px at 88% 8%,rgba(49,125,255,.20) 0%,transparent 62%),
+          radial-gradient(760px 560px at 4% 96%,rgba(53,219,255,.13) 0%,transparent 60%),
+          linear-gradient(160deg,#041028 0%,#020817 58%,#01050f 100%);
+        display:none;flex-direction:column;inset:0;overflow:hidden;
+        padding:40px 56px 44px;position:absolute}
+      .slide::before{background-image:radial-gradient(rgba(96,211,255,.16) 1px,transparent 1px);
+        background-size:30px 30px;content:"";inset:0;
+        mask-image:linear-gradient(90deg,#000 0%,rgba(0,0,0,.6) 55%,transparent 100%);
+        opacity:.5;pointer-events:none;position:absolute;z-index:0}
+      .slide.active{display:flex}
+      .slide>*{position:relative;z-index:1}
 
-      .topline { align-items: center; color: #dbeaff; display: flex; flex: 0 0 auto; font-size: 16px; font-weight: 700; gap: 14px; letter-spacing: .17em; text-transform: uppercase; }
-      .diamond { border: 2px solid var(--gold); box-shadow: 0 0 20px rgba(255,189,74,.4); flex: none; height: 14px; transform: rotate(45deg); width: 14px; }
-      .topline b { color: var(--gold); font-weight: 800; }
-      .cls { background: rgba(255,189,74,.14); border: 1px solid rgba(255,189,74,.5); border-radius: 8px; color: var(--gold); font-size: 15px; letter-spacing: .1em; padding: 4px 12px; }
-      .sn { color: var(--muted); letter-spacing: .1em; margin-left: auto; }
+      .topline{align-items:center;color:#dbeaff;display:flex;flex:0 0 auto;font-size:14px;
+        font-weight:700;gap:12px;letter-spacing:.16em;text-transform:uppercase}
+      .diamond{border:2px solid var(--gold);box-shadow:0 0 18px rgba(255,189,74,.4);flex:none;
+        height:12px;transform:rotate(45deg);width:12px}
+      .topline b{color:var(--gold);font-weight:800}
+      .cls{background:rgba(255,189,74,.14);border:1px solid rgba(255,189,74,.5);border-radius:7px;
+        color:var(--gold);font-size:13px;letter-spacing:.09em;margin-left:auto;padding:3px 10px}
 
-      h1, h2, h3, p, ul { margin: 0; }
-      h1, h2, h3 { font-family: var(--disp); }
-      h1 { font-size: 104px; letter-spacing: -.05em; line-height: 1.06; }
-      h2 { font-size: 66px; letter-spacing: -.04em; line-height: 1.08; }
-      .eyebrow { color: var(--gold); font-size: 19px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; }
-      .lede { color: var(--muted); font-size: 30px; line-height: 1.45; }
-      .gold { color: var(--gold); } .cyan { color: var(--cyan); } .orange { color: var(--orange); }
+      h1,h2,h3,p{margin:0}
+      h1,h2,h3{font-family:var(--disp)}
+      h1{font-size:74px;letter-spacing:-.05em;line-height:1.06}
+      h2{font-size:48px;letter-spacing:-.04em;line-height:1.1}
+      .eyebrow{color:var(--gold);font-size:16px;font-weight:800;letter-spacing:.17em;text-transform:uppercase}
+      .lede{color:var(--muted);font-size:24px;line-height:1.45}
+      .gold{color:var(--gold)}.cyan{color:var(--cyan)}.orange{color:var(--orange)}
+      code{font-family:ui-monospace,"Cascadia Mono",Consolas,monospace}
 
-      .body { display: flex; flex: 1 1 auto; flex-direction: column; justify-content: center; gap: 34px; padding-top: 26px; }
-      .head { display: grid; gap: 16px; }
-      .note { border-left: 5px solid var(--gold); color: #ffe6b4; font-size: 25px; font-weight: 600; line-height: 1.4; padding-left: 22px; }
-      .note.cy { border-left-color: var(--cyan); color: #dff6ff; }
+      .body{display:flex;flex:1 1 auto;flex-direction:column;justify-content:center;gap:22px;padding-top:18px}
+      .head{display:grid;gap:11px}
+      .note{border-left:4px solid var(--gold);color:#ffe6b4;font-size:20px;font-weight:600;
+        line-height:1.4;padding-left:18px}
+      .note.cy{border-left-color:var(--cyan);color:#dff6ff}
 
-      /* --- bìa --- */
-      .hero-grid { align-items: center; display: grid; gap: 56px; grid-template-columns: 1fr 440px; }
-      .hero-copy { display: grid; gap: 30px; }
-      .capital { background: linear-gradient(145deg, rgba(13,54,104,.85), rgba(4,16,40,.85)); border: 1px solid rgba(65,203,255,.5); border-radius: 30px; overflow: hidden; padding: 38px 34px; position: relative; text-align: center; }
-      .capital::after { background: radial-gradient(circle, rgba(53,219,255,.7) 0 3px, transparent 4px); background-size: 46px 46px; content: ""; inset: 0; opacity: .28; position: absolute; }
-      .capital-label { color: var(--muted); font-size: 17px; font-weight: 700; letter-spacing: .13em; position: relative; text-transform: uppercase; z-index: 1; }
-      .capital-num { color: var(--gold); font-family: var(--disp); font-size: 172px; font-weight: 700; letter-spacing: -.055em; line-height: 1; margin-top: 14px; position: relative; text-shadow: 0 0 34px rgba(255,189,74,.4); z-index: 1; }
-      .capital-unit { color: #fff3d4; font-size: 26px; font-weight: 700; letter-spacing: .07em; margin-top: 8px; position: relative; text-transform: uppercase; z-index: 1; }
+      .hero{align-items:center;display:grid;gap:34px;grid-template-columns:1fr 300px}
+      .capital{background:linear-gradient(145deg,rgba(13,54,104,.85),rgba(4,16,40,.85));
+        border:1px solid rgba(65,203,255,.5);border-radius:26px;overflow:hidden;padding:26px 20px;
+        position:relative;text-align:center}
+      .capital::after{background:radial-gradient(circle,rgba(53,219,255,.7) 0 3px,transparent 4px);
+        background-size:42px 42px;content:"";inset:0;opacity:.28;position:absolute}
+      .capital .lb{color:var(--muted);font-size:14px;font-weight:700;letter-spacing:.12em;
+        position:relative;text-transform:uppercase;z-index:1}
+      .capital .nu{color:var(--gold);font-family:var(--disp);font-size:116px;font-weight:700;
+        letter-spacing:-.055em;line-height:1;margin-top:10px;position:relative;
+        text-shadow:0 0 30px rgba(255,189,74,.4);z-index:1}
+      .capital .un{color:#fff3d4;font-size:20px;font-weight:700;letter-spacing:.06em;margin-top:4px;
+        position:relative;text-transform:uppercase;z-index:1}
 
-      /* --- bảng lịch --- */
-      .tl { border: 1px solid var(--line); border-radius: 22px; overflow: hidden; }
-      .tl-row { align-items: center; border-bottom: 1px solid rgba(111,192,255,.13); display: grid; gap: 24px; grid-template-columns: 140px 300px 1fr; padding: 15px 36px; }
-      .tl-row:last-child { border-bottom: 0; }
-      .tl-row.hd { background: rgba(9,33,73,.75); padding: 10px 36px; }
-      .tl-row.hd span { color: var(--muted); font-size: 16px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
-      .tl-cp { color: var(--cyan); font-family: var(--disp); font-size: 36px; font-weight: 700; line-height: 1.15; }
-      .tl-time { color: var(--gold); font-family: var(--disp); font-size: 34px; font-weight: 700; line-height: 1.15; white-space: nowrap; }
-      .tl-name { font-size: 26px; font-weight: 600; line-height: 1.25; }
-      .tl-row.hl { background: rgba(255,189,74,.08); }
-      .tl-row.hl .tl-cp { color: var(--gold); }
+      .tl{border:1px solid var(--line);border-radius:17px;overflow:hidden}
+      .tl-row{align-items:center;border-bottom:1px solid rgba(111,192,255,.13);display:grid;gap:18px;
+        grid-template-columns:100px 190px 1fr;padding:10px 26px}
+      .tl-row:last-child{border-bottom:0}
+      .tl-row.hd{background:rgba(9,33,73,.75);padding:7px 26px}
+      .tl-row.hd span{color:var(--muted);font-size:13px;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
+      .tl-cp{color:var(--cyan);font-family:var(--disp);font-size:27px;font-weight:700}
+      .tl-time{color:var(--gold);font-family:var(--disp);font-size:25px;font-weight:700;white-space:nowrap}
+      .tl-name{font-size:20px;font-weight:600;line-height:1.25}
+      .tl-row.hl{background:rgba(255,189,74,.08)}
+      .tl-row.hl .tl-cp{color:var(--gold)}
 
-      /* --- thẻ --- */
-      .three { display: grid; gap: 24px; grid-template-columns: repeat(3, 1fr); }
-      .two { display: grid; gap: 28px; grid-template-columns: repeat(2, 1fr); }
-      .card { background: linear-gradient(160deg, rgba(9,37,74,.9), rgba(3,14,35,.85)); border: 1px solid var(--line); border-radius: 26px; display: grid; gap: 14px; padding: 30px 32px; }
-      .card.g { border-color: rgba(255,189,74,.55); }
-      .card.o { border-color: rgba(255,137,61,.5); }
-      .card.c { border-color: rgba(53,219,255,.5); }
-      .card-num { color: var(--gold); font-family: var(--disp); font-size: 78px; font-weight: 700; letter-spacing: -.05em; line-height: .9; }
-      .card h3 { font-size: 31px; letter-spacing: -.02em; line-height: 1.2; }
-      .card p { color: var(--muted); font-size: 22px; line-height: 1.48; }
-      .tag { font-size: 17px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
-      .tag.o { color: var(--orange); } .tag.c { color: var(--cyan); }
-      code { font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; }
-      .repo { background: rgba(3,13,32,.75); border: 1px solid var(--line); border-radius: 18px; color: #cfe6ff; font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; font-size: 27px; line-height: 1.85; padding: 20px 32px; }
-      .repo b { color: var(--gold); }
+      .two{display:grid;gap:18px;grid-template-columns:1fr 1fr}
+      .three{display:grid;gap:16px;grid-template-columns:repeat(3,1fr)}
+      .card{background:linear-gradient(160deg,rgba(9,37,74,.9),rgba(3,14,35,.85));
+        border:1px solid var(--line);border-radius:19px;display:flex;flex-direction:column;
+        gap:10px;padding:20px 22px}
+      .card.g{border-color:rgba(255,189,74,.58)}
+      .card.o{border-color:rgba(255,137,61,.5)}
+      .card.c{border-color:rgba(53,219,255,.5)}
+      .card h3{font-size:24px;letter-spacing:-.02em;line-height:1.18}
+      .card p{color:var(--muted);font-size:18px;line-height:1.45}
+      .card q{display:block;font-size:20px;font-style:italic;line-height:1.35}
+      .tag{font-size:14px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+      .tag.o{color:var(--orange)}.tag.c{color:var(--cyan)}.tag.g{color:var(--gold)}
+      .bignum{color:var(--gold);font-family:var(--disp);font-size:56px;font-weight:700;
+        letter-spacing:-.05em;line-height:.9}
 
-      /* --- danh sách có số --- */
-      .rows { display: grid; gap: 14px; }
-      .row { align-items: center; background: linear-gradient(145deg, rgba(7,32,66,.9), rgba(5,17,40,.85)); border: 1px solid var(--line); border-radius: 20px; display: grid; gap: 26px; grid-template-columns: 74px 1fr 160px; padding: 16px 30px; }
-      .rn { align-items: center; background: rgba(52,216,255,.12); border: 1px solid rgba(52,216,255,.45); border-radius: 13px; color: var(--cyan); display: flex; font-family: var(--disp); font-size: 28px; font-weight: 700; height: 60px; justify-content: center; }
-      .row.hl { border-color: rgba(255,189,74,.6); }
-      .row.hl .rn { background: rgba(255,189,74,.13); border-color: rgba(255,189,74,.55); color: var(--gold); }
-      .row h3 { font-size: 29px; letter-spacing: -.015em; line-height: 1.2; }
-      .row p { color: var(--muted); font-size: 21px; line-height: 1.3; margin-top: 5px; }
-      .pt { color: var(--gold); font-family: var(--disp); font-size: 48px; font-weight: 700; line-height: 1; text-align: right; white-space: nowrap; }
-      .pt small { font-family: var(--sans); font-size: 20px; font-weight: 600; }
+      .rows{display:grid;gap:9px}
+      .row{align-items:center;background:linear-gradient(145deg,rgba(7,32,66,.9),rgba(5,17,40,.85));
+        border:1px solid var(--line);border-radius:14px;display:grid;gap:18px;
+        grid-template-columns:46px 188px 1fr;padding:10px 22px}
+      .row.g{border-color:rgba(255,189,74,.58)}
+      .row .n{align-items:center;background:rgba(52,216,255,.12);border:1px solid rgba(52,216,255,.45);
+        border-radius:9px;color:var(--cyan);display:flex;font-family:var(--disp);font-size:18px;
+        font-weight:700;height:38px;justify-content:center}
+      .row.g .n{background:rgba(255,189,74,.13);border-color:rgba(255,189,74,.55);color:var(--gold)}
+      .row .lbl{color:#dff6ff;font-size:17px;font-weight:700;line-height:1.25}
+      .row .val{color:var(--muted);font-size:17px;line-height:1.35}
+      .row .val b{color:var(--ink);font-weight:600}
+      .pt{color:var(--gold)!important;font-family:var(--disp);font-size:30px;font-weight:700;text-align:right}
 
-      .art { display: flex; justify-content: center; }
-      .art svg { display: block; width: 100%; }
+      .repo{background:rgba(3,13,32,.75);border:1px solid var(--line);border-radius:13px;color:#cfe6ff;
+        font-family:ui-monospace,Consolas,monospace;font-size:19px;line-height:1.75;padding:12px 22px}
+      .repo b{color:var(--gold)}
+      .art{display:flex;justify-content:center}
+      .art svg{display:block;width:100%}
+      .check{display:grid;gap:8px}
+      .ck{align-items:center;background:rgba(5,19,45,.6);border:1px solid var(--line);border-radius:12px;
+        display:flex;font-size:19px;gap:14px;line-height:1.35;padding:11px 20px}
+      .ck.g{border-color:rgba(255,189,74,.5)}
+      .ck b{color:var(--cyan);flex:none;font-family:var(--disp);font-size:19px}
+      .ck.g b{color:var(--gold)}
 
-      .endcall { align-items: center; background: rgba(53,219,255,.09); border: 1px solid rgba(53,219,255,.42); border-radius: 22px; display: flex; gap: 34px; justify-content: space-between; padding: 22px 34px; }
-      .endcall strong { color: #dff6ff; font-size: 30px; font-weight: 700; }
-      .endcall span { color: var(--muted); font-size: 22px; text-align: right; }
+      /* ───────── CỘT ĐỒNG HỒ ───────── */
+      .rail{background:linear-gradient(180deg,#071733 0%,#030c1d 60%,#01060f 100%);
+        border-left:1px solid rgba(111,192,255,.3);display:grid;flex:0 0 460px;gap:20px;
+        grid-template-rows:1fr auto auto;padding:40px 36px;position:relative;width:460px}
+      #clockwrap,#brandwrap{align-self:center;display:grid;gap:20px}
+      q{quotes:none}
+      .rail::before{background:linear-gradient(180deg,var(--gold),transparent);content:"";
+        inset:0 auto 0 -1px;position:absolute;width:2px;opacity:.5}
+      .r-lbl{color:var(--muted);font-size:14px;font-weight:800;letter-spacing:.2em;text-transform:uppercase}
+      .clock{display:grid;gap:14px}
+      .t-read{color:var(--gold);cursor:pointer;font-family:var(--disp);font-size:118px;font-weight:700;
+        font-variant-numeric:tabular-nums;letter-spacing:-.03em;line-height:1;text-align:center;
+        text-shadow:0 0 34px rgba(255,189,74,.3);user-select:none}
+      .t-read.done{font-size:64px;letter-spacing:.02em}
+      .warn .t-read{color:var(--orange);text-shadow:0 0 34px rgba(255,137,61,.4)}
+      .done-wrap .t-read{color:#ff5a3d}
+      .bar{background:rgba(111,192,255,.16);border-radius:99px;height:10px;overflow:hidden}
+      .bar i{background:linear-gradient(90deg,var(--cyan),var(--gold));display:block;height:100%;
+        transition:width .4s linear;width:100%}
+      .warn .bar i{background:var(--orange)}
+      .done-wrap .bar i{background:#ff5a3d}
+      .done-wrap{animation:blink 1.1s steps(2,start) infinite}
+      @keyframes blink{50%{opacity:.4}}
 
-      /* --- nav --- */
-      .nav { align-items: center; bottom: 18px; display: flex; gap: 9px; position: fixed; right: 22px; z-index: 20; }
-      .nav button { background: rgba(5,19,45,.78); border: 1px solid rgba(151,207,255,.36); border-radius: 10px; color: #e9f5ff; cursor: pointer; font: 700 16px var(--sans); height: 40px; min-width: 44px; }
-      .nav button:hover { background: rgba(28,99,172,.55); border-color: var(--cyan); }
-      .nav button:disabled { cursor: not-allowed; opacity: .38; }
-      .dots { display: flex; gap: 6px; margin: 0 5px; }
-      .dot { background: rgba(211,233,255,.35); border-radius: 99px; height: 8px; transition: .2s; width: 8px; }
-      .dot.active { background: var(--gold); box-shadow: 0 0 12px var(--gold); width: 22px; }
-      .hint { bottom: 24px; color: rgba(206,225,248,.55); font-size: 13px; left: 24px; position: fixed; z-index: 20; }
+      .grid5{display:grid;gap:8px;grid-template-columns:repeat(5,1fr)}
+      .grid4{display:grid;gap:8px;grid-template-columns:repeat(4,1fr)}
+      .tbtn{background:rgba(12,38,78,.9);border:1px solid rgba(151,207,255,.34);border-radius:10px;
+        color:#e9f5ff;cursor:pointer;font:700 17px var(--sans);height:46px;padding:0 4px}
+      .tbtn:hover{background:rgba(28,99,172,.6);border-color:var(--cyan)}
+      .tbtn.on{background:rgba(255,189,74,.2);border-color:var(--gold);color:var(--gold)}
+      .tbtn.big{font-size:20px;height:54px}
+      .rule{background:rgba(111,192,255,.2);height:1px}
 
-      @media print {
-        @page { margin: 0; size: 1600px 900px; }
-        body { overflow: visible; }
-        .viewport { display: block; overflow: visible; position: static; }
-        .stage { height: auto; transform: none !important; width: 1600px; }
-        .slide { break-after: page; display: flex !important; height: 900px; page-break-after: always; position: relative; }
-        .nav, .hint { display: none; }
+
+      .brand{display:grid;gap:20px;justify-items:center;padding:26px 0}
+      .bdia{border:3px solid var(--gold);box-shadow:0 0 30px rgba(255,189,74,.45);height:46px;
+        transform:rotate(45deg);width:46px}
+      .btitle{color:var(--ink);font-family:var(--disp);font-size:54px;font-weight:700;
+        letter-spacing:-.035em;line-height:1.02;text-align:center}
+      .bsub{color:var(--gold);font-size:16px;font-weight:700;letter-spacing:.16em;
+        text-align:center;text-transform:uppercase}
+      .bnote{color:var(--muted);font-size:16px;line-height:1.55;text-align:center}
+      .r-foot{display:grid;gap:12px}
+      .r-count{color:var(--muted);font-family:var(--disp);font-size:34px;font-weight:700;text-align:center}
+      .r-count b{color:var(--gold)}
+      .grid3{display:grid;gap:8px;grid-template-columns:1fr 1fr 1fr}
+      .dots{display:flex;flex-wrap:wrap;gap:4px;justify-content:center}
+      .dot{background:rgba(211,233,255,.3);border-radius:99px;height:6px;transition:.2s;width:6px}
+      .dot.active{background:var(--gold);box-shadow:0 0 10px var(--gold);width:18px}
+      .r-hint{color:rgba(206,225,248,.5);font-size:13px;line-height:1.5}
+
+      @media print{
+        @page{margin:0;size:1600px 900px}
+        body{overflow:visible}
+        .viewport{display:block;overflow:visible;position:static}
+        .stage{display:block;height:auto;transform:none!important;width:1600px}
+        .main{position:relative}
+        .slide{break-after:page;display:flex!important;height:900px;padding:48px 72px;
+          page-break-after:always;position:relative;width:1600px}
+        .rail{display:none}
       }
     </style>
   </head>
   <body>
     <div class="viewport">
       <div class="stage" id="stage">
+        <div class="main">
 
-        <!-- 01 -->
         <section class="slide active">
-          <div class="topline"><span class="diamond"></span><b>AI THỰC CHIẾN</b><span>Mini Hackathon AI</span><span class="cls">LỚP 3B</span><span class="sn">01 / 08</span></div>
+          <div class="topline"><span class="diamond"></span><b>AI THỰC CHIẾN</b><span>Mini Hackathon AI</span><span class="cls">LỚP 3B</span></div>
           <div class="body">
-            <div class="hero-grid">
-              <div class="hero-copy">
+            <div class="hero">
+              <div style="display:grid;gap:20px">
                 <p class="eyebrow">Batch 04 · 17 → 19 tháng 9</p>
-                <h1>SPEC → Prototype<br /><span class="gold">→ Demo.</span></h1>
-                <p class="lede">Không phải cuộc thi code.<br />Đây là cuộc thi <span class="cyan">tư duy sản phẩm AI</span>.</p>
+                <h1>SPEC → Prototype<br><span class="gold">→ Demo.</span></h1>
+                <p class="lede">Không phải cuộc thi code.<br>Đây là cuộc thi <span class="cyan">tư duy sản phẩm AI</span>.</p>
               </div>
-              <div class="capital">
-                <p class="capital-label">Thời gian các bạn có</p>
-                <div class="capital-num">39</div>
-                <p class="capital-unit">giờ</p>
-              </div>
+              <div class="capital"><p class="lb">Các bạn có</p><div class="nu">39</div><p class="un">giờ</p></div>
             </div>
             <p class="note cy">Nhóm <strong>3–4 người</strong> · thi theo phòng · E402 và E403 trao giải riêng</p>
           </div>
         </section>
 
-        <!-- 02 -->
         <section class="slide">
-          <div class="topline"><span class="diamond"></span><b>AI THỰC CHIẾN</b><span>Đo cái gì</span><span class="cls">LỚP 3B</span><span class="sn">02 / 08</span></div>
+          <div class="topline"><span class="diamond"></span><b>AI THỰC CHIẾN</b><span>Đề bài</span><span class="cls">LỚP 3B</span></div>
+          <div class="body">
+            <div class="head">
+              <p class="eyebrow">Chọn 1 trong 5 track, rồi 1 đề trong track</p>
+              <h2>Làm <span class="gold">một tính năng</span> cho người trong khoá.</h2>
+            </div>
+            <div class="rows">
+              <article class="row"><div class="n">A</div><div class="lbl">VLearn Tutor</div><div class="val">Tối ưu tutor đang chạy, hoặc tính năng mới · <code>vlearn-pack/</code></div></article>
+              <article class="row"><div class="n">B</div><div class="lbl">Trợ lý Discord</div><div class="val">Tối ưu bot và bản tin ngày, hoặc tính năng mới cho TA · <code>discord-pack/</code></div></article>
+              <article class="row"><div class="n">C</div><div class="lbl">Lesson Studio</div><div class="val">Chuỗi sản xuất bài giảng — 5 đề C1–C5 · transcript và slide</div></article>
+              <article class="row"><div class="n">D</div><div class="lbl">Học tập thích ứng</div><div class="val">Trải nghiệm học mới trên VLearn · cả lớp là người dùng</div></article>
+              <article class="row"><div class="n">E</div><div class="lbl">Làn mở</div><div class="val">Sản phẩm AI khác, phải phục vụ người trong khoá. Chỉ chọn khi không nằm trong A–D</div></article>
+            </div>
+            <p class="note">Đề càng lớn (C, D) thì <strong>lát cắt càng phải nhỏ</strong>. Nhóm 3–4 người nên chọn lát cắt nhỏ và khảo sát nỗi đau cho kỹ.</p>
+          </div>
+        </section>
+
+        <section class="slide">
+          <div class="topline"><span class="diamond"></span><b>AI THỰC CHIẾN</b><span>Đo cái gì</span><span class="cls">LỚP 3B</span></div>
           <div class="body">
             <div class="head">
               <p class="eyebrow">Trước khi bắt tay vào làm</p>
@@ -168,22 +238,15 @@
               <p class="lede">Điểm cho theo <span class="cyan">bằng chứng</span> — vì sao chọn vấn đề này, dựa vào đâu, đo bằng cách nào.</p>
             </div>
             <div class="two">
-              <article class="card o">
-                <p class="tag o">Chưa đạt</p>
-                <h3>“Bọn em làm trợ lý AI, có 8 tính năng”</h3>
-              </article>
-              <article class="card c">
-                <p class="tag c">Đạt</p>
-                <h3>“Sinh viên mất 15 phút tìm slide cũ. Bọn em thử 21 câu, đúng 13”</h3>
-              </article>
+              <article class="card o"><p class="tag o">Chưa đạt</p><q>“Bọn em làm trợ lý AI, có 8 tính năng”</q></article>
+              <article class="card c"><p class="tag c">Đạt</p><q>“Học viên mất 15 phút tìm lại slide cũ. Bọn em thử 21 câu, đúng 13”</q></article>
             </div>
-            <p class="note">Báo số liệu <strong>trung thực vẫn được đủ điểm</strong> — kể cả khi kết quả chưa đẹp.</p>
+            <p class="note">Báo số liệu <strong>trung thực vẫn được đủ điểm</strong> — kể cả khi kết quả chưa đẹp. Số bị chỉnh sửa hoặc che giấu thì không được tính.</p>
           </div>
         </section>
 
-        <!-- 03 -->
         <section class="slide">
-          <div class="topline"><span class="diamond"></span><b>AI THỰC CHIẾN</b><span>Lịch nộp</span><span class="cls">LỚP 3B</span><span class="sn">03 / 08</span></div>
+          <div class="topline"><span class="diamond"></span><b>AI THỰC CHIẾN</b><span>Lịch nộp</span><span class="cls">LỚP 3B</span></div>
           <div class="body">
             <div class="head">
               <p class="eyebrow">Chụp màn hình slide này</p>
@@ -191,215 +254,494 @@
             </div>
             <div class="tl">
               <div class="tl-row hd"><span>Mốc</span><span>Hạn nộp</span><span>Nộp gì</span></div>
-              <div class="tl-row"><div class="tl-cp">CP1</div><div class="tl-time">19:30 · 17/9</div><div class="tl-name">Canvas 4 ô + link repo GitHub</div></div>
+              <div class="tl-row"><div class="tl-cp" style="color:#c2d0ea;font-size:18px">Khai mạc</div><div class="tl-time" style="color:#c2d0ea;font-size:20px">17:30 · 17/9</div><div class="tl-name" style="color:#c2d0ea">Phát đề lúc 18:00</div></div>
+              <div class="tl-row hl"><div class="tl-cp">CP1</div><div class="tl-time">19:30 · 17/9</div><div class="tl-name">Canvas 7 dòng + link repo</div></div>
               <div class="tl-row"><div class="tl-cp">CP2</div><div class="tl-time">21:00 · 17/9</div><div class="tl-name">Luồng hoạt động — sơ đồ cũng được</div></div>
               <div class="tl-row"><div class="tl-cp">CP3</div><div class="tl-time">16:00 · 18/9</div><div class="tl-name">Video thao tác 30 giây + số đo</div></div>
-              <div class="tl-row hl"><div class="tl-cp">CP4</div><div class="tl-time">21:00 · 18/9</div><div class="tl-name">Chốt <code>spec.md</code> — khoá chuẩn “đạt”</div></div>
-              <div class="tl-row hl"><div class="tl-cp">CP5</div><div class="tl-time">22:30 · 18/9</div><div class="tl-name">Slide PDF + video dự phòng — hạn cuối</div></div>
+              <div class="tl-row"><div class="tl-cp">CP4</div><div class="tl-time">21:00 · 18/9</div><div class="tl-name">Chốt <code>spec.md</code></div></div>
+              <div class="tl-row hl"><div class="tl-cp">CP5</div><div class="tl-time">22:30 · 18/9</div><div class="tl-name">Slide PDF + video dự phòng — <strong>hạn cuối</strong></div></div>
               <div class="tl-row"><div class="tl-cp">CP6</div><div class="tl-time">09:00 · 19/9</div><div class="tl-name">Thuyết trình — không nộp thêm</div></div>
             </div>
             <p class="note">Mỗi mốc <strong>5 điểm</strong>. Nộp muộn là <strong>0 điểm mốc đó</strong>, không bù bằng mốc khác được.</p>
           </div>
         </section>
 
-        <!-- 04 -->
+        <section class="slide" data-rail="1">
+          <div class="topline"><span class="diamond"></span><b>AI THỰC CHIẾN</b><span>CP1 · Canvas là gì</span><span class="cls">LỚP 3B</span></div>
+          <div class="body">
+            <div class="head">
+              <p class="eyebrow">Mốc CP1 · hạn 19:30 · 17/9</p>
+              <h2>Canvas là <span class="gold">một tờ bảy dòng.</span></h2>
+            </div>
+            <div class="three">
+              <article class="card c"><p class="tag c">Hiểu đơn giản</p><h3>Mỗi dòng một câu hỏi, điền ngắn</h3><p>Không phải bài luận. Cả canvas vừa một trang.</p></article>
+              <article class="card g"><p class="tag g">Nộp thế nào</p><h3>Gõ thẳng chữ vào form</h3><p><strong class="gold">Không cần thiết kế ảnh, không cần vẽ đẹp.</strong> Copy bảy dòng vào ô trả lời là xong.</p></article>
+              <article class="card"><p class="tag c">Để làm gì</p><h3>Biết mình làm gì trước khi mở editor</h3><p>Bỏ qua bước này thường code hai tiếng rồi mới nhận ra không ai cần.</p></article>
+            </div>
+            <p class="note cy">Canvas ở CP1 là <strong>bản nháp</strong> — chưa cần đủ số liệu. Chốt thật ở CP4. Mẫu đầy đủ ở <code>02-guide.md</code> §1.5.</p>
+          </div>
+        </section>
+
+        <section class="slide" data-rail="1">
+          <div class="topline"><span class="diamond"></span><b>AI THỰC CHIẾN</b><span>CP1 · Bảy dòng</span><span class="cls">LỚP 3B</span></div>
+          <div class="body">
+            <div class="head">
+              <p class="eyebrow">Mẫu trống — copy vào form, hoặc vào <code>canvas.md</code></p>
+              <h2>Bảy dòng, <span class="gold">bảy câu hỏi.</span></h2>
+            </div>
+            <div class="rows">
+              <article class="row"><div class="n">1</div><div class="lbl">Track + đề</div><div class="val">Chọn track nào, đề nào trong track đó</div></article>
+              <article class="row"><div class="n">2</div><div class="lbl">Job executor</div><div class="val">Ai · đang ở đâu · đang làm gì — một vai cụ thể, không phải “học viên nói chung”</div></article>
+              <article class="row"><div class="n">3</div><div class="lbl">Pain một câu</div><div class="val">Ai – đang làm gì – vướng đâu – hậu quả gì</div></article>
+              <article class="row g"><div class="n">4</div><div class="lbl">1–2 bằng chứng đầu</div><div class="val">Số + cách đếm + mã hội thoại/tin nhắn · hoặc khảo sát có số người. Tốt nhất là cả hai</div></article>
+              <article class="row g"><div class="n">5</div><div class="lbl">Lát cắt MỘT CÂU</div><div class="val">1 người dùng · 1 việc · 1 quyết định AI · 1 kết quả</div></article>
+              <article class="row"><div class="n">6</div><div class="lbl">AI tự làm đến đâu</div><div class="val">AI tự làm gì, <b>không</b> tự làm gì, một dòng lý do · kèm <b>≥3 người ngoài nhóm</b> đồng ý thử</div></article>
+              <article class="row"><div class="n">7</div><div class="lbl">Phân công có tên</div><div class="val">Mỗi việc một tên người — giám khảo sẽ hỏi đúng người đó</div></article>
+            </div>
+            <p class="note">Hai dòng vàng ăn điểm nặng nhất: <strong>dòng 4</strong> nuôi R1 (15đ), <strong>dòng 5</strong> nuôi R2 (15đ).</p>
+          </div>
+        </section>
+
+        <section class="slide" data-rail="1">
+          <div class="topline"><span class="diamond"></span><b>AI THỰC CHIẾN</b><span>CP1 · Ví dụ · dòng 1–4</span><span class="cls">LỚP 3B</span></div>
+          <div class="body">
+            <div class="head">
+              <p class="eyebrow">Ví dụ thật · Track B — trợ lý Discord</p>
+              <h2>Bốn dòng đầu <span class="gold">điền như thế này.</span></h2>
+            </div>
+            <div class="rows">
+              <article class="row"><div class="n">1</div><div class="lbl">Track + đề</div><div class="val"><b>B · Trợ lý Discord — trả lời câu hỏi tiện ích lặp lại.</b></div></article>
+              <article class="row"><div class="n">2</div><div class="lbl">Job executor</div><div class="val"><b>Học viên mới, tuần đầu, đang ở kênh chung, vừa gõ một câu hỏi về tiện ích</b> (căn tin, thư viện, thẻ, wifi).</div></article>
+              <article class="row"><div class="n">3</div><div class="lbl">Pain một câu</div><div class="val"><b>Câu hỏi bị trôi giữa tin nhắn khác, không ai trả lời hoặc trả lời sau vài giờ; học viên hỏi lại hoặc tự đi tìm, cùng một câu được hỏi nhiều lần.</b></div></article>
+              <article class="row g"><div class="n">4</div><div class="lbl">Bằng chứng đầu</div><div class="val"><b>Trong <code>discord-pack/k4_messages.csv</code>: 68/1.092 tin là câu hỏi tiện ích</b> (lọc từ khoá “căn tin | thư viện | thẻ | wifi” + dấu ?); <b>31 tin không có reply trong 2 giờ</b>. Mã tin: <code>D0147</code>, <code>D0392</code>, <code>D0518</code>.<br>Hỏi 22 học viên: <b>15/22</b> từng hỏi một câu tiện ích mà không ai trả lời.</div></article>
+            </div>
+            <p class="note cy">Dòng 4 có <strong>số · cách đếm · mã tin</strong> — TA mở ra kiểm được trong 2 phút.</p>
+          </div>
+        </section>
+
+        <section class="slide" data-rail="1">
+          <div class="topline"><span class="diamond"></span><b>AI THỰC CHIẾN</b><span>CP1 · Ví dụ · dòng 5–7</span><span class="cls">LỚP 3B</span></div>
+          <div class="body">
+            <div class="head">
+              <p class="eyebrow">Ví dụ thật · Track B — trợ lý Discord</p>
+              <h2>Ba dòng cuối <span class="gold">điền như thế này.</span></h2>
+            </div>
+            <div class="rows">
+              <article class="row g"><div class="n">5</div><div class="lbl">Lát cắt MỘT CÂU</div><div class="val"><b>Học viên mới gõ câu hỏi tiện ích vào kênh chung · AI quyết định câu hỏi có khớp mục nào trong tài liệu nội quy không · khớp thì trả lời kèm trích dẫn mục; không khớp thì nói “chưa có trong tài liệu” và tag người phụ trách.</b></div></article>
+              <article class="row"><div class="n">6</div><div class="lbl">AI tự làm đến đâu</div><div class="val"><b>Tự</b> trả lời khi tìm được mục khớp. <b>Không tự</b> suy đoán, <b>không tự</b> tạo event thay người dùng.<br><b>Lý do:</b> thông tin sai về nội quy làm học viên vi phạm; tạo event thay người khác là hành động không hoàn tác được.<br><b>Willing users:</b> Minh · Hà · Trang.</div></article>
+              <article class="row"><div class="n">7</div><div class="lbl">Phân công có tên</div><div class="val"><b>An</b> — bằng chứng + golden set · <b>Bình</b> — prompt/retrieval · <b>Châu</b> — bot + gọi AI thật · <b>Dũng</b> — spec + demo.</div></article>
+            </div>
+            <p class="note">Ý tưởng gốc còn có “gom nhóm đá bóng”. Họ <strong>cắt đi</strong>, để xuống backlog — nhờ vậy dòng 5 chỉ còn <strong>một việc</strong>.</p>
+          </div>
+        </section>
+
+        <section class="slide" data-rail="1">
+          <div class="topline"><span class="diamond"></span><b>AI THỰC CHIẾN</b><span>CP1 · Dòng 5 · lát cắt</span><span class="cls">LỚP 3B</span></div>
+          <div class="body">
+            <div class="head">
+              <p class="eyebrow">Dòng 5 — dòng khó nhất</p>
+              <h2>Một câu, <span class="gold">bốn mảnh.</span></h2>
+            </div>
+            <div class="art">
+              <svg viewBox="0 0 1030 168" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Lát cắt gồm một người dùng, một việc, một quyết định AI, một kết quả">
+                <g font-family="Be Vietnam Pro, Segoe UI, Arial, sans-serif">
+                  <rect x="0" y="10" width="247" height="128" rx="16" fill="#35dbff" fill-opacity=".13" stroke="#35dbff" stroke-opacity=".5" stroke-width="1.5"/>
+                  <text x="123" y="44" fill="#8fd6ee" font-size="14" font-weight="800" letter-spacing="1.4" text-anchor="middle">MỘT NGƯỜI DÙNG</text>
+                  <text x="123" y="80" fill="#f0fbff" font-size="18" font-weight="600" text-anchor="middle">Học viên mới</text>
+                  <text x="123" y="107" fill="#f0fbff" font-size="18" font-weight="600" text-anchor="middle">tuần đầu</text>
+                  <rect x="261" y="10" width="247" height="128" rx="16" fill="#35dbff" fill-opacity=".13" stroke="#35dbff" stroke-opacity=".5" stroke-width="1.5"/>
+                  <text x="384" y="44" fill="#8fd6ee" font-size="14" font-weight="800" letter-spacing="1.4" text-anchor="middle">MỘT VIỆC</text>
+                  <text x="384" y="80" fill="#f0fbff" font-size="18" font-weight="600" text-anchor="middle">Gõ câu hỏi tiện ích</text>
+                  <text x="384" y="107" fill="#f0fbff" font-size="18" font-weight="600" text-anchor="middle">vào kênh chung</text>
+                  <rect x="522" y="10" width="247" height="128" rx="16" fill="#ffbd4a" fill-opacity=".17" stroke="#ffbd4a" stroke-opacity=".78" stroke-width="2.5"/>
+                  <text x="645" y="44" fill="#d9ae6b" font-size="14" font-weight="800" letter-spacing="1.4" text-anchor="middle">MỘT QUYẾT ĐỊNH AI</text>
+                  <text x="645" y="80" fill="#fff3d4" font-size="18" font-weight="600" text-anchor="middle">Có khớp mục nào</text>
+                  <text x="645" y="107" fill="#fff3d4" font-size="18" font-weight="600" text-anchor="middle">trong nội quy không?</text>
+                  <rect x="783" y="10" width="247" height="128" rx="16" fill="#35dbff" fill-opacity=".13" stroke="#35dbff" stroke-opacity=".5" stroke-width="1.5"/>
+                  <text x="906" y="44" fill="#8fd6ee" font-size="14" font-weight="800" letter-spacing="1.4" text-anchor="middle">MỘT KẾT QUẢ</text>
+                  <text x="906" y="80" fill="#f0fbff" font-size="18" font-weight="600" text-anchor="middle">Trả lời kèm trích mục</text>
+                  <text x="906" y="107" fill="#f0fbff" font-size="18" font-weight="600" text-anchor="middle">— hoặc tag người trực</text>
+                  <text x="254" y="82" fill="#6fc0ff" font-size="22" font-weight="700" text-anchor="middle">·</text>
+                  <text x="515" y="82" fill="#6fc0ff" font-size="22" font-weight="700" text-anchor="middle">·</text>
+                  <text x="776" y="82" fill="#ffbd4a" font-size="22" font-weight="700" text-anchor="middle">·</text>
+                </g>
+              </svg>
+            </div>
+            <div class="rows">
+              <article class="row"><div class="n">✗</div><div class="lbl" style="color:#ffd3b8">“Cải thiện trợ lý Discord cho học viên đỡ chờ”</div><div class="val">Thiếu ba mảnh — không có việc cụ thể, không có quyết định AI, “đỡ chờ” không đo được</div></article>
+              <article class="row"><div class="n">✗</div><div class="lbl" style="color:#ffd3b8">“AI gom câu hỏi, tóm tắt kênh và viết bản tin”</div><div class="val">Ba việc — không phải một lát cắt. Chọn một, hai cái kia xuống backlog</div></article>
+            </div>
+            <p class="note cy">Ô vàng là chỗ <strong>AI thật sự quyết định</strong>. Câu nào không chỉ ra được ô này thì chưa phải lát cắt.</p>
+          </div>
+        </section>
+
+        <section class="slide" data-rail="1">
+          <div class="topline"><span class="diamond"></span><b>AI THỰC CHIẾN</b><span>CP1 · Nộp gì</span><span class="cls">LỚP 3B</span></div>
+          <div class="body">
+            <div class="head">
+              <p class="eyebrow">Form CP1 · hạn 19:30 · 17/9</p>
+              <h2>Nộp gì ở CP1.</h2>
+            </div>
+            <div class="check">
+              <div class="ck g"><b>1</b> <strong class="gold">Canvas 7 dòng — gõ thẳng chữ vào ô trả lời của form.</strong> Không cần làm ảnh, không cần vẽ.</div>
+              <div class="ck"><b>2</b> Họ tên và <strong class="cyan">mã học viên của đội trưởng</strong> — cả 5 mốc phải cùng một mã.</div>
+              <div class="ck"><b>3</b> <strong class="cyan">Link repo GitHub</strong> đã để công khai — thử mở bằng cửa sổ ẩn danh.</div>
+              <div class="ck"><b>4</b> Tích xác nhận <strong class="cyan">cả nhóm đã nộp link repo lên VLearn</strong>.</div>
+              <div class="ck g"><b>5</b> <strong class="gold">Tên ít nhất 3 người ngoài nhóm</strong> đồng ý cho thử sản phẩm ở CP5.</div>
+            </div>
+            <div class="repo">Tên repo &nbsp;→&nbsp; K4-<b>&lt;lớp&gt;</b>-<b>&lt;phòng&gt;</b>-<b>&lt;tên nhóm&gt;</b><br>Ví dụ &nbsp;&nbsp;&nbsp;→&nbsp; K4-3B-E403-StudyPulse</div>
+            <p class="note">Xin willing user <strong>ngay tối nay</strong>, đừng để đến CP5. Khối R6 cần 2 trong số họ.</p>
+          </div>
+        </section>
+
+        <section class="slide" data-rail="1">
+          <div class="topline"><span class="diamond"></span><b>AI THỰC CHIẾN</b><span>CP2 · Luồng hoạt động</span><span class="cls">LỚP 3B</span></div>
+          <div class="body">
+            <div class="head">
+              <p class="eyebrow">Mốc CP2 · hạn 21:00 · 17/9 · chưa cần AI chạy thật</p>
+              <h2>Ba cách nộp — <span class="gold">chọn một là đủ.</span></h2>
+            </div>
+            <div class="three">
+              <article class="card"><p class="tag c">Cách 1</p><h3>Bản mock bấm được</h3><p>Figma, trang tĩnh, Canva — thứ gì click qua lại được cũng được.</p></article>
+              <article class="card g"><p class="tag g">Cách 2 · nhẹ nhất</p><h3>Sơ đồ luồng</h3><p><strong class="gold">Vẽ tay chụp ảnh cũng được.</strong> Miễn rõ các bước và rõ chỗ nào AI quyết định.</p></article>
+              <article class="card"><p class="tag c">Cách 3</p><h3>Video quay màn hình</h3><p>Đi hết một lượt. Không cần dựng, không cần lồng tiếng.</p></article>
+            </div>
+            <p class="note">Mốc này để <strong>nhẹ</strong>. Vẽ ra giấy thì thấy chỗ hổng trong mười phút; code xong mới thấy thì mất cả buổi sửa.</p>
+          </div>
+        </section>
+
+        <section class="slide" data-rail="1">
+          <div class="topline"><span class="diamond"></span><b>AI THỰC CHIẾN</b><span>CP3 · Video + số đo</span><span class="cls">LỚP 3B</span></div>
+          <div class="body">
+            <div class="head">
+              <p class="eyebrow">Mốc CP3 · hạn 16:00 · 18/9 · từ đây AI phải chạy thật</p>
+              <h2>Nộp hai thứ: <span class="gold">video và con số.</span></h2>
+            </div>
+            <div class="two">
+              <article class="card c"><p class="tag c">1 · Video thao tác — 30 giây</p><p>Quay màn hình. Bấm thật, thấy AI trả kết quả thật. <strong class="cyan">Không cần dựng, không cần lồng tiếng.</strong></p></article>
+              <article class="card g"><p class="tag g">2 · Số đo</p><p>Chuẩn bị bộ câu thử → cho chạy hết → đếm bao nhiêu câu đạt chuẩn nhóm tự đặt.</p></article>
+            </div>
+            <div class="two">
+              <article class="card o"><p class="tag o">Chưa đạt</p><q>“Sản phẩm chạy tốt”</q></article>
+              <article class="card c"><p class="tag c">Đạt</p><q>“Thử 21 câu, 13 câu trả đúng có dẫn nguồn, 8 câu sai hoặc bịa”</q></article>
+            </div>
+            <p class="note"><strong>Số xấu vẫn đủ điểm</strong> — miễn là số thật. 13/21 mà phân tích được vì sao 8 câu kia sai thì ăn điểm cao hơn “chạy tốt”.</p>
+          </div>
+        </section>
+
+        <section class="slide" data-rail="1">
+          <div class="topline"><span class="diamond"></span><b>AI THỰC CHIẾN</b><span>CP4 · Chốt spec</span><span class="cls">LỚP 3B</span></div>
+          <div class="body">
+            <div class="head">
+              <p class="eyebrow">Mốc CP4 · hạn 21:00 · 18/9</p>
+              <h2>Chốt <span class="gold">“thế nào là đạt”</span><br>trước khi biết kết quả.</h2>
+            </div>
+            <div class="two">
+              <article class="card"><p class="tag c">Vì sao chốt sớm</p><p>Đặt chuẩn sau khi đã thấy kết quả thì con số không nói lên điều gì — và người nghe cũng biết vậy.</p></article>
+              <article class="card g"><p class="tag g">Nộp gì</p><p>Link <code>spec.md</code> đã chốt chuẩn “đạt” · và <strong class="gold">tự khai phần nào chưa làm xong</strong>.</p></article>
+            </div>
+            <p class="note">Sau 21:00 · 18/9 <strong>không sửa chuẩn “đạt” được nữa</strong>.</p>
+            <p class="note cy"><strong>Khai thiếu không bị trừ điểm. Giấu mới bị.</strong></p>
+          </div>
+        </section>
+
+        <section class="slide" data-rail="1">
+          <div class="topline"><span class="diamond"></span><b>AI THỰC CHIẾN</b><span>CP5 · Hạn cuối</span><span class="cls">LỚP 3B</span></div>
+          <div class="body">
+            <div class="head">
+              <p class="eyebrow">Mốc CP5 · hạn 22:30 · 18/9 · sau mốc này không nộp thêm gì</p>
+              <h2>Ba việc <span class="gold">phải xong trước giờ này.</span></h2>
+            </div>
+            <div class="three">
+              <article class="card"><p class="tag c">1</p><h3>Slide 6 trang, xuất PDF</h3><p>Nộp PDF chứ không nộp link — link hay hỏng quyền đúng lúc cần.</p></article>
+              <article class="card"><p class="tag c">2</p><h3>Video demo dự phòng</h3><p>Hôm pitch mạng chết thì BTC chiếu video này và <strong class="cyan">không trừ điểm</strong>.</p></article>
+              <article class="card g"><p class="tag g">3</p><h3>R6 · cho người ngoài dùng thử</h3><p>5 người ngoài nhóm, 2 trong số đó khai từ CP1. Lưu trong <code>validation/</code>.</p></article>
+            </div>
+            <p class="note"><strong>Bỏ qua R6 thì trần điểm là 92.</strong> Cần quote nguyên văn lời người dùng và ít nhất một thay đổi ghi vào §9 Changelog. Người dùng chê cũng được tính đủ điểm.</p>
+          </div>
+        </section>
+
         <section class="slide">
-          <div class="topline"><span class="diamond"></span><b>AI THỰC CHIẾN</b><span>Cách nộp</span><span class="cls">LỚP 3B</span><span class="sn">04 / 08</span></div>
+          <div class="topline"><span class="diamond"></span><b>AI THỰC CHIẾN</b><span>Cách nộp</span><span class="cls">LỚP 3B</span></div>
           <div class="body">
             <div class="head">
               <p class="eyebrow">Ba điều dễ làm sai nhất</p>
               <h2>Nộp thế nào <span class="gold">cho đúng.</span></h2>
             </div>
             <div class="three">
-              <article class="card g">
-                <div class="card-num">01</div>
-                <h3>Đội trưởng nộp thay cả nhóm</h3>
-                <p>Một phiếu cho cả nhóm ở mỗi mốc. <strong class="gold">Cả 5 mốc cùng một mã học viên</strong> — đây là cách BTC ghép phiếu.</p>
-              </article>
-              <article class="card o">
-                <div class="card-num">02</div>
-                <h3>Tạo repo mới, đừng fork</h3>
-                <p>Fork mang theo thư mục <code>data/</code>, mà repo phải công khai — <strong class="orange">dữ liệu khoá lên mạng</strong>.</p>
-              </article>
-              <article class="card c">
-                <div class="card-num">03</div>
-                <h3>Từng người nộp link lên VLearn</h3>
-                <p>Cả nhóm nộp <strong class="cyan">cùng một link repo</strong>. Đây là chỗ duy nhất mỗi người phải tự làm.</p>
-              </article>
+              <article class="card g"><div class="bignum">01</div><h3>Đội trưởng nộp thay cả nhóm</h3><p>Một phiếu mỗi mốc. <strong class="gold">Cả 5 mốc cùng một mã học viên</strong> — BTC ghép phiếu theo mã này.</p></article>
+              <article class="card o"><div class="bignum">02</div><h3>Tạo repo mới, đừng fork</h3><p>Fork mang <code>data/</code> vào repo bắt buộc công khai — <strong class="orange">dữ liệu khoá lên mạng</strong>.</p></article>
+              <article class="card c"><div class="bignum">03</div><h3>Từng người nộp link lên VLearn</h3><p>Cả nhóm nộp <strong class="cyan">cùng một link repo</strong>. Chỗ duy nhất không ai nộp thay được.</p></article>
             </div>
-            <div class="repo">
-              Tên repo &nbsp;→&nbsp; K4-<b>&lt;lớp&gt;</b>-<b>&lt;phòng&gt;</b>-<b>&lt;tên nhóm&gt;</b> &nbsp;&nbsp;·&nbsp;&nbsp; Ví dụ &nbsp;→&nbsp; K4-<b>3B</b>-<b>E403</b>-StudyPulse
-            </div>
+            <div class="repo">Tên repo &nbsp;→&nbsp; K4-<b>&lt;lớp&gt;</b>-<b>&lt;phòng&gt;</b>-<b>&lt;tên nhóm&gt;</b> &nbsp;·&nbsp; ví dụ K4-3B-E403-StudyPulse</div>
           </div>
         </section>
 
-        <!-- 05 -->
         <section class="slide">
-          <div class="topline"><span class="diamond"></span><b>AI THỰC CHIẾN</b><span>Cách chấm</span><span class="cls">LỚP 3B</span><span class="sn">05 / 08</span></div>
+          <div class="topline"><span class="diamond"></span><b>AI THỰC CHIẾN</b><span>Cách chấm</span><span class="cls">LỚP 3B</span></div>
           <div class="body">
             <div class="head">
-              <p class="eyebrow">Đọc 04-rubric.md ngay tối nay</p>
+              <p class="eyebrow">Đọc <code>04-rubric.md</code> ngay tối nay</p>
               <h2>Một trăm điểm <span class="gold">đến từ đâu.</span></h2>
             </div>
             <div class="art">
-              <svg viewBox="0 0 1480 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="25 điểm nộp đúng hạn, 67 điểm chấm trên repo, 8 điểm cho người ngoài dùng thử">
+              <svg viewBox="0 0 1030 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="25 điểm nộp đúng hạn, 67 điểm chấm trên repo, 8 điểm cho người ngoài dùng thử">
                 <g font-family="Space Grotesk, Be Vietnam Pro, Arial, sans-serif">
-                  <rect x="40" y="0" width="346" height="112" rx="18" fill="#35dbff" fill-opacity=".18" stroke="#35dbff" stroke-opacity=".62" stroke-width="1.5"/>
-                  <text x="213" y="76" fill="#bdf0ff" font-size="60" font-weight="700" text-anchor="middle">25đ</text>
-                  <rect x="390" y="0" width="934" height="112" rx="18" fill="#ffbd4a" fill-opacity=".17" stroke="#ffbd4a" stroke-opacity=".62" stroke-width="1.5"/>
-                  <text x="857" y="76" fill="#ffe0a7" font-size="60" font-weight="700" text-anchor="middle">67đ</text>
-                  <rect x="1328" y="0" width="112" height="112" rx="18" fill="#ff893d" fill-opacity=".18" stroke="#ff893d" stroke-opacity=".62" stroke-width="1.5"/>
-                  <text x="1384" y="76" fill="#ffcbaa" font-size="52" font-weight="700" text-anchor="middle">8đ</text>
+                  <rect x="20" y="0" width="243" height="92" rx="16" fill="#35dbff" fill-opacity=".18" stroke="#35dbff" stroke-opacity=".62" stroke-width="1.5"/>
+                  <text x="141" y="64" fill="#bdf0ff" font-size="48" font-weight="700" text-anchor="middle">25đ</text>
+                  <rect x="267" y="0" width="659" height="92" rx="16" fill="#ffbd4a" fill-opacity=".17" stroke="#ffbd4a" stroke-opacity=".62" stroke-width="1.5"/>
+                  <text x="596" y="64" fill="#ffe0a7" font-size="48" font-weight="700" text-anchor="middle">67đ</text>
+                  <rect x="930" y="0" width="80" height="92" rx="16" fill="#ff893d" fill-opacity=".18" stroke="#ff893d" stroke-opacity=".62" stroke-width="1.5"/>
+                  <text x="970" y="62" fill="#ffcbaa" font-size="38" font-weight="700" text-anchor="middle">8đ</text>
                 </g>
-                <g font-family="Be Vietnam Pro, Segoe UI, Arial, sans-serif" font-size="22">
-                  <text x="213" y="156" fill="#8fd6ee" text-anchor="middle">nộp đúng hạn · 5 mốc × 5đ</text>
-                  <text x="857" y="156" fill="#d9ae6b" text-anchor="middle">chấm trên file trong repo</text>
-                  <text x="1440" y="156" fill="#ff9d6d" text-anchor="end">cho người ngoài dùng thử</text>
+                <g font-family="Be Vietnam Pro, Segoe UI, Arial, sans-serif" font-size="17">
+                  <text x="141" y="126" fill="#8fd6ee" text-anchor="middle">nộp đúng hạn · 5 mốc × 5đ</text>
+                  <text x="596" y="126" fill="#d9ae6b" text-anchor="middle">chấm trên file trong repo</text>
+                  <text x="1010" y="126" fill="#ff9d6d" text-anchor="end">cho người ngoài dùng thử</text>
                 </g>
               </svg>
             </div>
-            <div class="two">
-              <article class="card g">
-                <h3>Viết spec tử tế ăn <span class="gold">45 trên 67 điểm</span></h3>
-                <p>Ba khối nặng nhất — bằng chứng, thiết kế, kiểm thử — đều chấm trên <code>spec.md</code>.</p>
-              </article>
-              <article class="card">
-                <h3>Bỏ qua phần dùng thử thì trần điểm là <span class="orange">92</span></h3>
-                <p>Cần <strong class="cyan">5 người ngoài nhóm</strong>, chép <strong class="cyan">nguyên văn</strong> lời họ nói, và sửa ít nhất một thứ theo đó.</p>
-              </article>
+            <div class="rows">
+              <article class="row"><div class="n">R1</div><div class="lbl">Bằng chứng &amp; impact — 15đ</div><div class="val"><code>spec.md</code> §1–§2 · <b>bắt nguồn từ dòng 4 Canvas</b></div></article>
+              <article class="row"><div class="n">R2</div><div class="lbl">Lát cắt &amp; thiết kế — 15đ</div><div class="val"><code>spec.md</code> §4 · <b>bắt nguồn từ dòng 5 Canvas</b></div></article>
+              <article class="row"><div class="n">R4</div><div class="lbl">Kiểm thử — 15đ</div><div class="val"><code>spec.md</code> §7 + <code>eval/</code> · <b>bắt nguồn từ số đo CP3</b></div></article>
+              <article class="row g"><div class="n">R6</div><div class="lbl">Cho người ngoài dùng thử — 8đ</div><div class="val"><code>validation/</code> · <b>không làm thì trần điểm là 92</b></div></article>
             </div>
+            <p class="note">Còn R3 (11đ) chỗ khó &amp; rủi ro · R5 (8đ) prototype chạy được · R7 (3đ) repo. <strong>Viết spec tử tế là ăn 45 trên 67 điểm.</strong></p>
           </div>
         </section>
 
-        <!-- 06 -->
         <section class="slide">
-          <div class="topline"><span class="diamond"></span><b>AI THỰC CHIẾN</b><span>Buổi thi</span><span class="cls">LỚP 3B</span><span class="sn">06 / 08</span></div>
+          <div class="topline"><span class="diamond"></span><b>AI THỰC CHIẾN</b><span>Buổi thi</span><span class="cls">LỚP 3B</span></div>
           <div class="body">
             <div class="head">
               <p class="eyebrow">Sáng 19/9 · mốc CP6</p>
               <h2>Thi trong cụm trước, <span class="gold">rồi mới lên sân khấu.</span></h2>
             </div>
             <div class="art">
-              <svg viewBox="0 0 1480 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Thi trong cụm, game đầu tư, chung kết phòng, cả phòng bình chọn">
+              <svg viewBox="0 0 1030 132" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Thi trong cụm, game đầu tư, chung kết phòng, cả phòng bình chọn">
                 <g font-family="Be Vietnam Pro, Segoe UI, Arial, sans-serif">
-                  <rect x="0" y="16" width="330" height="106" rx="20" fill="#35dbff" fill-opacity=".14" stroke="#35dbff" stroke-opacity=".5" stroke-width="1.5"/>
-                  <text x="165" y="60" fill="#bdf0ff" font-size="27" font-weight="700" text-anchor="middle">Thi trong cụm</text>
-                  <text x="165" y="94" fill="#8fd6ee" font-size="21" text-anchor="middle">demo tại bàn</text>
-                  <path d="M348 69 H374" stroke="#6fc0ff" stroke-width="2.5"/><path d="M368 61 L380 69 L368 77 Z" fill="#6fc0ff"/>
-                  <rect x="390" y="16" width="330" height="106" rx="20" fill="#35dbff" fill-opacity=".14" stroke="#35dbff" stroke-opacity=".5" stroke-width="1.5"/>
-                  <text x="555" y="60" fill="#bdf0ff" font-size="27" font-weight="700" text-anchor="middle">Game đầu tư</text>
-                  <text x="555" y="94" fill="#8fd6ee" font-size="21" text-anchor="middle">mỗi đội 100 điểm vốn</text>
-                  <path d="M738 69 H764" stroke="#6fc0ff" stroke-width="2.5"/><path d="M758 61 L770 69 L758 77 Z" fill="#6fc0ff"/>
-                  <rect x="780" y="16" width="330" height="106" rx="20" fill="#ffbd4a" fill-opacity=".14" stroke="#ffbd4a" stroke-opacity=".55" stroke-width="1.5"/>
-                  <text x="945" y="60" fill="#ffe0a7" font-size="27" font-weight="700" text-anchor="middle">Chung kết phòng</text>
-                  <text x="945" y="94" fill="#d9ae6b" font-size="21" text-anchor="middle">mỗi đội 10 phút</text>
-                  <path d="M1128 69 H1154" stroke="#ffbd4a" stroke-width="2.5"/><path d="M1148 61 L1160 69 L1148 77 Z" fill="#ffbd4a"/>
-                  <rect x="1170" y="16" width="310" height="106" rx="20" fill="#ffbd4a" fill-opacity=".19" stroke="#ffbd4a" stroke-opacity=".72" stroke-width="1.5"/>
-                  <text x="1325" y="60" fill="#fff3d4" font-size="27" font-weight="700" text-anchor="middle">Cả phòng bình chọn</text>
-                  <text x="1325" y="94" fill="#d9ae6b" font-size="21" text-anchor="middle">ra Top của phòng</text>
+                  <rect x="0" y="8" width="230" height="92" rx="16" fill="#35dbff" fill-opacity=".14" stroke="#35dbff" stroke-opacity=".5" stroke-width="1.5"/>
+                  <text x="115" y="46" fill="#bdf0ff" font-size="20" font-weight="700" text-anchor="middle">Thi trong cụm</text>
+                  <text x="115" y="74" fill="#8fd6ee" font-size="16" text-anchor="middle">demo tại bàn</text>
+                  <path d="M240 54 H258" stroke="#6fc0ff" stroke-width="2.5"/><path d="M254 47 L264 54 L254 61 Z" fill="#6fc0ff"/>
+                  <rect x="270" y="8" width="230" height="92" rx="16" fill="#35dbff" fill-opacity=".14" stroke="#35dbff" stroke-opacity=".5" stroke-width="1.5"/>
+                  <text x="385" y="46" fill="#bdf0ff" font-size="20" font-weight="700" text-anchor="middle">Game đầu tư</text>
+                  <text x="385" y="74" fill="#8fd6ee" font-size="16" text-anchor="middle">mỗi đội 100 điểm vốn</text>
+                  <path d="M510 54 H528" stroke="#6fc0ff" stroke-width="2.5"/><path d="M524 47 L534 54 L524 61 Z" fill="#6fc0ff"/>
+                  <rect x="540" y="8" width="230" height="92" rx="16" fill="#ffbd4a" fill-opacity=".14" stroke="#ffbd4a" stroke-opacity=".55" stroke-width="1.5"/>
+                  <text x="655" y="46" fill="#ffe0a7" font-size="20" font-weight="700" text-anchor="middle">Chung kết phòng</text>
+                  <text x="655" y="74" fill="#d9ae6b" font-size="16" text-anchor="middle">mỗi đội 10 phút</text>
+                  <path d="M780 54 H798" stroke="#ffbd4a" stroke-width="2.5"/><path d="M794 47 L804 54 L794 61 Z" fill="#ffbd4a"/>
+                  <rect x="810" y="8" width="220" height="92" rx="16" fill="#ffbd4a" fill-opacity=".19" stroke="#ffbd4a" stroke-opacity=".72" stroke-width="1.5"/>
+                  <text x="920" y="46" fill="#fff3d4" font-size="20" font-weight="700" text-anchor="middle">Cả phòng bình chọn</text>
+                  <text x="920" y="74" fill="#d9ae6b" font-size="16" text-anchor="middle">ra Top của phòng</text>
                 </g>
               </svg>
             </div>
             <div class="two">
               <article class="card">
-                <h3>Game đầu tư — <span class="cyan">hai luật thôi</span></h3>
-                <p>Không đầu tư vào đội mình · <strong class="gold">tổng phải đúng 100</strong>, thừa hoặc thiếu là phiếu không được tính. Chia cho mấy đội tuỳ các bạn.</p>
+                <p class="tag c">Vòng cụm</p>
+                <p><strong class="cyan">E403</strong> 6 cụm · 6 phút/nhóm · 6 đội vào chung kết · Top 3<br><strong class="cyan">E402</strong> 5 cụm · 7 phút/nhóm · 5 đội vào chung kết · Top 2</p>
+                <p>Chung kết: 10–15 phút chuẩn bị · thứ tự quay ngẫu nhiên · mỗi đội 10 phút = 7 trình bày + 3 hỏi đáp.</p>
               </article>
               <article class="card g">
-                <h3>Demo hỏng vì mạng <span class="gold">không bị trừ điểm</span></h3>
-                <p>Đó là lý do CP5 bắt nộp <strong class="gold">video demo dự phòng</strong>. Hỏng thì chiếu video, chấm trên video.</p>
+                <p class="tag g">Game đầu tư — hai luật</p>
+                <p>Không đầu tư vào đội mình · <strong class="gold">tổng phải đúng 100</strong>, thừa hoặc thiếu là phiếu không được tính.</p>
+                <p>Mẹo: xem tới đâu ghi số dự định ra giấy nháp, xem hết cụm mới cân đối rồi điền form.</p>
               </article>
             </div>
           </div>
         </section>
 
-        <!-- 07 -->
         <section class="slide">
-          <div class="topline"><span class="diamond"></span><b>AI THỰC CHIẾN</b><span>Giải thưởng</span><span class="cls">LỚP 3B</span><span class="sn">07 / 08</span></div>
+          <div class="topline"><span class="diamond"></span><b>AI THỰC CHIẾN</b><span>Giải thưởng</span><span class="cls">LỚP 3B</span></div>
           <div class="body">
             <div class="head">
               <p class="eyebrow">Cộng thẳng vào điểm bài lab</p>
               <h2>Điểm thưởng <span class="gold">cho mỗi thành viên.</span></h2>
             </div>
             <div class="rows">
-              <article class="row hl"><div class="rn">1</div><div><h3>Giải Nhất của phòng</h3></div><div class="pt">+10<small>đ</small></div></article>
-              <article class="row hl"><div class="rn">2</div><div><h3>Giải Nhì của phòng</h3></div><div class="pt">+5<small>đ</small></div></article>
-              <article class="row"><div class="rn">3</div><div><h3>Giải Ba — chỉ phòng E403</h3></div><div class="pt">+3<small>đ</small></div></article>
-              <article class="row"><div class="rn">✓</div><div><h3>Vào chung kết nhưng không có giải</h3></div><div class="pt">+2<small>đ</small></div></article>
-              <article class="row"><div class="rn">★</div><div><h3>Đội đầu tư nhiều điểm nhất và sớm nhất vào đội giải Nhất</h3></div><div class="pt">+2<small>đ</small></div></article>
+              <article class="row g"><div class="n">1</div><div class="lbl">Giải Nhất của phòng</div><div class="val pt">+10đ</div></article>
+              <article class="row g"><div class="n">2</div><div class="lbl">Giải Nhì của phòng</div><div class="val pt">+5đ</div></article>
+              <article class="row"><div class="n">3</div><div class="lbl">Giải Ba — chỉ phòng E403</div><div class="val pt">+3đ</div></article>
+              <article class="row"><div class="n">✓</div><div class="lbl">Vào chung kết nhưng không có giải</div><div class="val pt">+2đ</div></article>
+              <article class="row"><div class="n">★</div><div class="lbl">Đội đầu tư nhiều điểm nhất và sớm nhất vào đội giải Nhất</div><div class="val pt">+2đ</div></article>
             </div>
-            <p class="note cy">E403 có <strong>7 đội</strong> được cộng điểm · E402 có <strong>6 đội</strong> · thêm <strong>4 giải track</strong> do team VLearn và team Studio trao.</p>
+            <p class="note cy">E403 có <strong>7 đội</strong> được cộng điểm · E402 có <strong>6 đội</strong> · thêm <strong>4 giải track</strong>: A + D do team VLearn chọn, C do team Studio chọn.</p>
           </div>
         </section>
 
-        <!-- 08 -->
         <section class="slide">
-          <div class="topline"><span class="diamond"></span><b>AI THỰC CHIẾN</b><span>Bắt đầu</span><span class="cls">LỚP 3B</span><span class="sn">08 / 08</span></div>
+          <div class="topline"><span class="diamond"></span><b>AI THỰC CHIẾN</b><span>Bắt đầu</span><span class="cls">LỚP 3B</span></div>
           <div class="body">
             <div class="head">
-              <p class="eyebrow">Trước mốc CP1 lúc 19:30 hôm nay</p>
+              <p class="eyebrow">Trước mốc CP1 lúc 19:30 · 17/9</p>
               <h2>Bốn việc <span class="gold">làm ngay bây giờ.</span></h2>
             </div>
             <div class="rows">
-              <article class="row hl"><div class="rn">1</div><div><h3>Chốt nhóm 3–4 người và chọn đội trưởng</h3><p>Đội trưởng là người chắc chắn theo được cả 5 mốc</p></div><div class="pt">5<small> phút</small></div></article>
-              <article class="row hl"><div class="rn">2</div><div><h3>Tạo repo mới, đặt tên đúng, để công khai</h3><p>Thử mở bằng cửa sổ ẩn danh — mở được thì mới đúng</p></div><div class="pt">5<small> phút</small></div></article>
-              <article class="row"><div class="rn">3</div><div><h3>Copy README của BTC về repo, điền bảng thành viên</h3><p>Ghi rõ ai làm phần nào — giám khảo sẽ hỏi đúng người đó</p></div><div class="pt">10<small> phút</small></div></article>
-              <article class="row"><div class="rn">4</div><div><h3>Mỗi người nộp link repo lên VLearn</h3><p>Cả nhóm cùng một link</p></div><div class="pt">2<small> phút</small></div></article>
+              <article class="row g"><div class="n">1</div><div class="lbl">Chốt nhóm 3–4 người, chọn đội trưởng</div><div class="val">Đội trưởng là người chắc chắn theo được cả 5 mốc</div></article>
+              <article class="row g"><div class="n">2</div><div class="lbl">Tạo repo mới, đặt tên đúng, để công khai</div><div class="val">Thử mở bằng cửa sổ ẩn danh — mở được thì mới đúng</div></article>
+              <article class="row"><div class="n">3</div><div class="lbl">Copy README của BTC, điền bảng thành viên</div><div class="val">Ghi rõ ai làm phần nào — giám khảo sẽ hỏi đúng người đó</div></article>
+              <article class="row"><div class="n">4</div><div class="lbl">Xin 3 người ngoài nhóm cho thử sản phẩm</div><div class="val">Ghi tên họ lại, điền vào dòng 6 của Canvas</div></article>
             </div>
-            <div class="endcall">
-              <strong>Kẹt quá 20 phút thì gọi coach</strong>
-              <span>Mọi thông báo và link nộp đều ghim trên Discord</span>
-            </div>
+            <p class="note">Kẹt quá 20 phút thì gọi coach. Mọi thông báo và link nộp đều <strong>ghim trên Discord và đăng trên VLearn</strong>.</p>
           </div>
         </section>
+        </div>
+
+      <aside class="rail" id="rail">
+        <div id="clockwrap">
+        <p class="r-lbl">Bộ đếm giờ</p>
+        <div class="clock">
+          <div class="t-read" id="tread" title="Bấm để gõ số phút bất kỳ">05:00</div>
+          <div class="bar"><i id="tbar"></i></div>
+        </div>
+        <div class="grid5">
+          <button class="tbtn" data-min="3" type="button">3′</button>
+          <button class="tbtn" data-min="5" type="button">5′</button>
+          <button class="tbtn" data-min="10" type="button">10′</button>
+          <button class="tbtn" data-min="15" type="button">15′</button>
+          <button class="tbtn" data-min="30" type="button">30′</button>
+        </div>
+        <div class="grid5">
+          <button class="tbtn big" id="tplay" type="button" title="Chạy / dừng — phím T">▶</button>
+          <button class="tbtn big" id="treset" type="button" title="Về đầu — phím R">⟲</button>
+          <button class="tbtn" id="tminus" type="button">−1′</button>
+          <button class="tbtn" id="tplus" type="button">+1′</button>
+          <button class="tbtn" id="tbell" type="button" title="Bật / tắt chuông báo hết giờ">🔔</button>
+        </div>
+        </div>
+        <div id="brandwrap" style="display:none">
+          <p class="r-lbl">Mini Hackathon AI</p>
+          <div class="brand">
+            <span class="bdia"></span>
+            <p class="btitle">AI<br>THỰC<br>CHIẾN</p>
+            <p class="bsub">Batch 04 · Lớp 3B</p>
+          </div>
+          <p class="bnote">Bộ đếm giờ tự bật ở các slide checkpoint — hoặc bất cứ lúc nào đang chạy.</p>
+        </div>
+        <div class="rule"></div>
+        <div class="r-foot">
+          <p class="r-lbl">Slide</p>
+          <p class="r-count"><b id="rcur">1</b> / <span id="rtot">19</span></p>
+          <div class="grid3">
+            <button class="tbtn big" id="prev" type="button" aria-label="Slide trước">‹</button>
+            <button class="tbtn big" id="next" type="button" aria-label="Slide sau">›</button>
+            <button class="tbtn big" id="fs" type="button" aria-label="Toàn màn hình">⛶</button>
+          </div>
+          <div class="dots"></div>
+          <p class="r-hint">← → chuyển slide · <b>T</b> chạy/dừng giờ · <b>R</b> về đầu · <b>F</b> toàn màn hình · bấm vào số giờ để gõ số phút bất kỳ · 🔔 bật/tắt chuông</p>
+        </div>
+      </aside>
 
       </div>
     </div>
-
-    <div class="hint">← → chuyển slide &middot; F toàn màn hình &middot; Ctrl+P in ra PDF</div>
-    <nav class="nav" aria-label="Điều hướng slide">
-      <button id="prev" type="button" aria-label="Slide trước">‹</button>
-      <div class="dots"></div>
-      <button id="next" type="button" aria-label="Slide sau">›</button>
-      <button id="fs" type="button" aria-label="Toàn màn hình">⛶</button>
-    </nav>
-
     <script>
-      const stage = document.querySelector('#stage');
-      const slides = [...document.querySelectorAll('.slide')];
-      const dotsWrap = document.querySelector('.dots');
-      slides.forEach(() => dotsWrap.insertAdjacentHTML('beforeend', '<span class="dot"></span>'));
-      const dots = [...document.querySelectorAll('.dot')];
-      const prevButton = document.querySelector('#prev');
-      const nextButton = document.querySelector('#next');
-      let current = 0;
+      const stage=document.querySelector('#stage');
+      const slides=[...document.querySelectorAll('.slide')];
+      const dotsWrap=document.querySelector('.dots');
+      slides.forEach(()=>dotsWrap.insertAdjacentHTML('beforeend','<span class="dot"></span>'));
+      const dots=[...document.querySelectorAll('.dot')];
+      const prevB=document.querySelector('#prev'),nextB=document.querySelector('#next');
+      const rcur=document.querySelector('#rcur'),rtot=document.querySelector('#rtot');
+      const clockWrap=document.querySelector('#clockwrap');
+      const brandWrap=document.querySelector('#brandwrap');
+      let cur=0; rtot.textContent=slides.length;
 
-      function fit() {
-        const scale = Math.min(window.innerWidth / 1600, window.innerHeight / 900);
-        stage.style.transform = `scale(${scale})`;
+      function fit(){stage.style.transform=`scale(${Math.min(innerWidth/1600,innerHeight/900)})`}
+      addEventListener('resize',fit); fit();
+
+      function render(i){
+        cur=Math.max(0,Math.min(i,slides.length-1));
+        slides.forEach((s,k)=>s.classList.toggle('active',k===cur));
+        dots.forEach((d,k)=>d.classList.toggle('active',k===cur));
+        rcur.textContent=cur+1;
+        const isCP=slides[cur].dataset.rail==='1';
+        clockWrap.style.display=(isCP||running)?'':'none';
+        brandWrap.style.display=(isCP||running)?'none':'';
+        prevB.disabled=cur===0; nextB.disabled=cur===slides.length-1;
+        location.hash=`slide-${cur+1}`;
       }
-      window.addEventListener('resize', fit);
-      fit();
+      prevB.onclick=()=>render(cur-1); nextB.onclick=()=>render(cur+1);
+      document.querySelector('#fs').onclick=()=>document.documentElement.requestFullscreen?.();
 
-      function render(index) {
-        current = Math.max(0, Math.min(index, slides.length - 1));
-        slides.forEach((slide, i) => slide.classList.toggle('active', i === current));
-        dots.forEach((dot, i) => dot.classList.toggle('active', i === current));
-        prevButton.disabled = current === 0;
-        nextButton.disabled = current === slides.length - 1;
-        window.location.hash = `slide-${current + 1}`;
+      /* ── đồng hồ ── */
+      const rail=document.querySelector('#rail'),read=document.querySelector('#tread');
+      const bar=document.querySelector('#tbar'),playB=document.querySelector('#tplay');
+      let total=300,left=300,running=false,tick=null;
+      /* ── chuông báo hết giờ ── */
+      let actx=null,soundOn=true,alarmT=null;
+      const bellB=document.querySelector('#tbell');
+      function unlock(){
+        try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();
+          if(actx.state==='suspended')actx.resume()}catch(e){}
       }
+      function burst(){
+        if(!soundOn||!actx)return;
+        const t0=actx.currentTime;
+        [[0,880],[.42,880],[.84,880],[1.30,1175],[1.85,1568]].forEach(([off,hz])=>{
+          const o=actx.createOscillator(),g=actx.createGain();
+          o.type='triangle';o.frequency.setValueAtTime(hz,t0+off);
+          g.gain.setValueAtTime(.0001,t0+off);
+          g.gain.exponentialRampToValueAtTime(.4,t0+off+.02);
+          g.gain.exponentialRampToValueAtTime(.0001,t0+off+.36);
+          o.connect(g);g.connect(actx.destination);
+          o.start(t0+off);o.stop(t0+off+.38);
+        });
+      }
+      function alarm(){
+        unlock();burst();
+        clearTimeout(alarmT);
+        alarmT=setTimeout(()=>{burst();alarmT=setTimeout(burst,3000)},3000);
+      }
+      function hush(){clearTimeout(alarmT);alarmT=null}
+      bellB.onclick=()=>{soundOn=!soundOn;unlock();
+        bellB.textContent=soundOn?'🔔':'🔕';
+        bellB.classList.toggle('on',soundOn);
+        if(soundOn)burst();else hush()};
+      bellB.classList.add('on');
 
-      prevButton.addEventListener('click', () => render(current - 1));
-      nextButton.addEventListener('click', () => render(current + 1));
-      document.querySelector('#fs').addEventListener('click', () => document.documentElement.requestFullscreen?.());
-      document.addEventListener('keydown', (event) => {
-        if (['ArrowRight', 'PageDown', ' '].includes(event.key)) { event.preventDefault(); render(current + 1); }
-        if (['ArrowLeft', 'PageUp'].includes(event.key)) { event.preventDefault(); render(current - 1); }
-        if (event.key.toLowerCase() === 'f') { document.documentElement.requestFullscreen?.(); }
+
+      function paint(){
+        rail.classList.remove('warn','done-wrap'); read.classList.remove('done');
+        bar.style.width=(total>0?Math.max(0,left/total)*100:0)+'%';
+        if(left<=0){read.textContent='HẾT GIỜ';read.classList.add('done');rail.classList.add('done-wrap');return}
+        const m=Math.floor(left/60),s=left%60;
+        read.textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+        if(left<=60)rail.classList.add('warn');
+      }
+      function stop(){running=false;clearInterval(tick);tick=null;playB.textContent='▶';playB.classList.remove('on');paint();render(cur)}
+      function start(){
+        if(left<=0)return;
+        unlock();hush();running=true;playB.textContent='❚❚';playB.classList.add('on');
+        clearInterval(tick);render(cur);
+        tick=setInterval(()=>{left--;if(left<=0){left=0;stop();alarm()}paint()},1000);
+        paint();
+      }
+      const toggle=()=>running?stop():start();
+      function setMin(m){hush();unlock();total=Math.max(60,Math.round(m*60));left=total;stop()}
+      function bump(d){total=Math.max(60,total+d*60);left=Math.max(0,left+d*60);paint()}
+      document.querySelectorAll('[data-min]').forEach(b=>b.onclick=()=>setMin(+b.dataset.min));
+      playB.onclick=toggle;
+      document.querySelector('#treset').onclick=()=>{hush();left=total;stop()};
+      document.querySelector('#tplus').onclick=()=>bump(1);
+      document.querySelector('#tminus').onclick=()=>bump(-1);
+      read.onclick=()=>{const v=prompt('Đặt số phút:',Math.round(total/60));
+        if(v!==null&&!isNaN(+v)&&+v>0)setMin(+v)};
+      paint();
+
+      addEventListener('keydown',e=>{
+        if(e.target.tagName==='INPUT')return;
+        const k=e.key.toLowerCase();
+        if(['arrowright','pagedown',' '].includes(k)){e.preventDefault();render(cur+1)}
+        if(['arrowleft','pageup'].includes(k)){e.preventDefault();render(cur-1)}
+        if(k==='f')document.documentElement.requestFullscreen?.();
+        if(k==='t'){e.preventDefault();toggle()}
+        if(k==='r'){e.preventDefault();left=total;stop()}
       });
-      const initial = Number(window.location.hash.replace('#slide-', ''));
-      render(Number.isInteger(initial) && initial > 0 ? initial - 1 : 0);
+      const init=Number(location.hash.replace('#slide-',''));
+      render(Number.isInteger(init)&&init>0?init-1:0);
       document.fonts?.ready.then(fit);
     </script>
   </body>
